@@ -10,5 +10,8 @@ package resto.Entidades;
  * @author lau-d
  */
 public class Mesa {
-//        comentario    
+//        comentario
+public void prueba1(){
+    
+}    
 }
