@@ -4,12 +4,12 @@ package resto.Entidades;
 
 public class Producto {
      private int idProducto;
-    private String codigo;
+    private int codigo;
     private String nombre;
     private int cantidad;
     private double precio;
 
-    public Producto(int idProducto, String codigo, String nombre, int cantidad, double precio) {
+    public Producto(int idProducto, int codigo, String nombre, int cantidad, double precio) {
         this.idProducto = idProducto;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -17,7 +17,7 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Producto(String codigo, String nombre, int cantidad, double precio) {
+    public Producto(int codigo, String nombre, int cantidad, double precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -35,11 +35,11 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
