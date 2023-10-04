@@ -35,24 +35,24 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
 		}
 	}
     
-     public List<Producto> obtenerProducto() {
-       List <Producto> productos=new ArrayList<>();
-       String sql = "SELECT * from producto";
-       try{
-           PreparedStatement ps= con.prepareStatement(sql);
-           ResultSet rs=ps.executeQuery();
-           
-           while(rs.next()){
-               int id= rs.getInt("idProducto");
-               int codigo= rs.getInt("codigo");
-               String nombre= rs.getString("nombre");
-               int cantidad= rs.getInt("cantidad");
-               double precio = rs.getDouble("precio");
-               productos.add(new Producto(id,codigo,nombre,cantidad,precio));
-           }
-       }catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, "error al acceder a la tabla Productos"); 
-     }
-     return productos;
-    }
+//     public List<Producto> obtenerProducto() {
+//       List <Producto> productos=new ArrayList<>();
+//       String sql = "SELECT * from producto";
+//       try{
+//           PreparedStatement ps= con.prepareStatement(sql);
+//           ResultSet rs=ps.executeQuery();
+//           
+//           while(rs.next()){
+//               int id= rs.getInt("idProducto");
+//               int codigo= rs.getInt("codigo");
+//               String nombre= rs.getString("nombre");
+//               int cantidad= rs.getInt("cantidad");
+//               double precio = rs.getDouble("precio");
+//               productos.add(new Producto(id,codigo,nombre,cantidad,precio));
+//           }
+//       }catch (SQLException ex) {
+//         JOptionPane.showMessageDialog(null, "error al acceder a la tabla Productos"); 
+//     }
+//     return productos;
+//    }
 }

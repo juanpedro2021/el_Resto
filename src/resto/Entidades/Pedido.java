@@ -12,22 +12,25 @@ public class Pedido {
     private Producto producto;
     private LocalDateTime fecha;
     private int estado;
+    private double importe;
 
-    public Pedido(int idPedido, Mesa mesa, Mesero mesero, Producto producto, LocalDateTime fecha, int estado) {
+    public Pedido(int idPedido, Mesa mesa, Mesero mesero, Producto producto, LocalDateTime fecha, int estado, double importe) {
         this.idPedido = idPedido;
         this.mesa = mesa;
         this.mesero = mesero;
         this.producto = producto;
         this.fecha = fecha;
         this.estado = estado;
+        this.importe = importe;
     }
 
-    public Pedido(Mesa mesa, Mesero mesero, Producto producto, LocalDateTime fecha, int estado) {
+    public Pedido(Mesa mesa, Mesero mesero, Producto producto, LocalDateTime fecha, int estado,double importe) {
         this.mesa = mesa;
         this.mesero = mesero;
         this.producto = producto;
         this.fecha = fecha;
         this.estado = estado;
+        this.importe = importe;
     }
 
     public Pedido() {
@@ -81,18 +84,19 @@ public class Pedido {
         this.estado = estado;
     }
 
+    public double getImporte() {
+        return importe;
+    }
+
+    public void setImporte(double importe) {
+        this.importe = importe;
+    }
+
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", mesa=" + mesa + ", mesero=" + mesero + ", producto=" + producto + ", fecha=" + fecha + ", estado=" + estado + '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", mesa=" + mesa + ", mesero=" + mesero + ", producto=" + producto + ", fecha=" + fecha + ", estado=" + estado + ", importe=" + importe + '}';
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     

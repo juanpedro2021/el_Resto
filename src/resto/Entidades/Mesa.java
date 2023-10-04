@@ -7,6 +7,7 @@ public class Mesa {
     private int numMesa;
     private int capacidad;
     private int estado ;
+    private Reserva reserva ;
 
     public Mesa(int idMesa, int numMesa, int capacidad, int estado) {
         this.idMesa = idMesa;
