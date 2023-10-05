@@ -3,22 +3,22 @@ package resto.Entidades;
 
 
 public class Producto {
-     private int idProducto;
-    private int codigo;
+  private int idProducto;
+    private boolean estado;
     private String nombre;
     private int cantidad;
     private double precio;
 
-    public Producto(int idProducto, int codigo, String nombre, int cantidad, double precio) {
+    public Producto(int idProducto, boolean estado, String nombre, int cantidad, double precio) {
         this.idProducto = idProducto;
-        this.codigo = codigo;
+        this.estado = estado;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
     }
 
-    public Producto(int codigo, String nombre, int cantidad, double precio) {
-        this.codigo = codigo;
+    public Producto(boolean estado, String nombre, int cantidad, double precio) {
+        this.estado = estado;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -35,13 +35,15 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
+
+
 
     public String getNombre() {
         return nombre;
@@ -69,8 +71,8 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "productoID=" + idProducto + ", codigo=" + codigo + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", estado=" + estado + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio=" + precio + '}';
     }
-    
+
     
 }
