@@ -28,7 +28,7 @@ public class ProductoData {
            
            while(rs.next()){
                int id= rs.getInt("idProducto");
-               int codigo= rs.getInt("codigo");
+               Boolean codigo= rs.getBoolean("codigo");
                String nombre= rs.getString("nombre");
                int cantidad= rs.getInt("cantidad");
                double precio = rs.getDouble("precio");
