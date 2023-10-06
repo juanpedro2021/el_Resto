@@ -22,14 +22,17 @@ public class ReservaData {
     }
     
     public void guardarReserva (Reserva reserva) {
-        String sql = "INSERT INTO reserva (idmesa, nombre, DNI, fecha) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO reserva (idMesa, nombre, DNI, fecha, estado) VALUES (?, ?, ?, ?, ?)";
         try {
                 PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, reserva.getIdMesa());
                 ps.setString(2, reserva.getNombre());
                 ps.setInt(3, reserva.getDNI());
-                ps.setTimestamp(4, Timestamp.valueOf(reserva.getFecha()));
-        
+                ps.setTimestamp(4, reserva.getFecha());
+                //ps.setInt(5, reserva.getEstado());
+                ps.setBoolean(5, reserva.isEstado());
+               
+                
                 ps.executeUpdate();
                 ResultSet rs = ps.getGeneratedKeys();
                 
@@ -39,9 +42,38 @@ public class ReservaData {
 		}
 		ps.close();
 		} catch (SQLException ex){
-		JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva "+ex.getMessage());
+		JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva"+ex.getMessage());
 		}
 		}
     
     
+    public Reserva buscarReserva(int id){
+	Reserva reserva = null;
+	String sql = "SELECT idMesa, nombre, DNI, fecha FROM reserva WHERE idReserva = ? AND estado = 1";
+	
+	try {
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {
+		reserva=new Reserva();
+		reserva.setIdReserva(id);
+		reserva.setNombre(rs.getString("Nombre"));
+                reserva.setDNI(rs.getInt("DNI"));
+                reserva.setFecha(rs.getTimestamp("Fecha"));
+		reserva.setEstado(true); 
+		
+		} else {
+			JOptionPane.showMessageDialog(null, "No existe la Reserva");
+		}
+		ps.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva "+ex.getMessage());
+		}
+		return reserva;
+                
+    
+}
 }

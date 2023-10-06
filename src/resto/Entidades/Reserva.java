@@ -17,11 +17,11 @@ public class Reserva {
     private int idMesa;
     private String nombre;
     private int DNI;
-    private LocalDateTime fecha;
-    private int estado;
+    private Timestamp fecha;
+    private boolean estado;
 
 
-    public Reserva (int idReserva, int idMesa, String nombre, int DNI, LocalDateTime fecha, int estado){
+    public Reserva (int idReserva, int idMesa, String nombre, int DNI, Timestamp fecha, boolean estado){
         this.idReserva = idReserva;
         this.idMesa = idMesa;
         this.nombre = nombre;
@@ -30,7 +30,7 @@ public class Reserva {
         this.estado = estado;
     }
     
-    public Reserva (int idMesa, String nombre, int DNI, LocalDateTime fecha, int estado){
+    public Reserva (int idMesa, String nombre, int DNI, Timestamp fecha, boolean estado){
         this.idMesa = idMesa;
         this.nombre = nombre;
         this.DNI = DNI;
@@ -73,21 +73,25 @@ public class Reserva {
         this.DNI = DNI;
     }
 
-    public LocalDateTime getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 
-    public int getEstado() {
+    
+    
+    public boolean isEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+  
 
     @Override
     public String toString() {
