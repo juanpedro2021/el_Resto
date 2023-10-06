@@ -19,6 +19,7 @@ public class MesaData {
     public MesaData() {
         con= Conexion.getConexion();
         
+    }
         public void guardarMesa (Mesa mesa) {
 	
 	String sql = "INSERT INTO mesa (numMesa, capacidad, estado) VALUES (?, ?, ?)";

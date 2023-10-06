@@ -61,30 +61,58 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
         try{
             PreparedStatement ps= con.prepareStatement(sql);
             ps.setBoolean(1, producto.isEstado());
-            ps.setString(2, producto.toString());
+            ps.setString(2, producto.getNombre());
             ps.setInt(3, producto.getCantidad());
             ps.setDouble(4, producto.getPrecio());
             ps.executeUpdate();
+            
+            	ResultSet rs = ps.getGeneratedKeys();
+
+		if (rs.next()){
+			producto.setidProducto(rs.getInt(1));
+		JOptionPane.showMessageDialog(null, "Producto añadido con éxito");
+		}
+                
             ps.close();
         }catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, "error al agregar Producto"); 
+         JOptionPane.showMessageDialog(null, "error al agregar Producto"+ex.getMessage()); 
      }
         
     }
     
     public void modificarProducto(Producto producto){
-        String sql="INSERT INTO producto (estado, nombre, cantidad, precio) VALUES (?, ?, ?, ?)";
+        
+       
+        String sql="UPDATE producto SET estado=?, nombre =?, cantidad=?, precio=? WHERE idProducto=?";
+        
         
        try{
            PreparedStatement ps=con.prepareStatement(sql);
            ps.setBoolean(1, producto.isEstado());
-            ps.setString(2, producto.toString());
+            ps.setString(2, producto.getNombre());
             ps.setInt(3, producto.getCantidad());
             ps.setDouble(4, producto.getPrecio());
-            ps.executeUpdate();
+            ps.setInt(5, producto.getidProducto());
+            
+            
+           // ResultSet rs = ps.getGeneratedKeys();
+            
+            	int exito = ps.executeUpdate();
+
+		if (exito == 1) {
+		
+		JOptionPane.showMessageDialog(null, "Modificado exitosamente");
+                
+                } else {
+                    
+		JOptionPane.showMessageDialog(null, "El producto no existe");
+		}
+
+            
             ps.close();
+            
        } catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, "error al modificar Producto"); 
+         JOptionPane.showMessageDialog(null, "error al modificar Producto"+ex.getMessage()); 
      }
     }
 }
