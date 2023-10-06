@@ -55,4 +55,36 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
 //     }
 //     return productos;
 //    }
+     public void agregarProducto(Producto producto){
+        String sql="INSERT INTO producto (estado, nombre, cantidad, precio) VALUES (?, ?, ?, ?)";
+        
+        try{
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setBoolean(1, producto.isEstado());
+            ps.setString(2, producto.toString());
+            ps.setInt(3, producto.getCantidad());
+            ps.setDouble(4, producto.getPrecio());
+            ps.executeUpdate();
+            ps.close();
+        }catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al agregar Producto"); 
+     }
+        
+    }
+    
+    public void modificarProducto(Producto producto){
+        String sql="INSERT INTO producto (estado, nombre, cantidad, precio) VALUES (?, ?, ?, ?)";
+        
+       try{
+           PreparedStatement ps=con.prepareStatement(sql);
+           ps.setBoolean(1, producto.isEstado());
+            ps.setString(2, producto.toString());
+            ps.setInt(3, producto.getCantidad());
+            ps.setDouble(4, producto.getPrecio());
+            ps.executeUpdate();
+            ps.close();
+       } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al modificar Producto"); 
+     }
+    }
 }
