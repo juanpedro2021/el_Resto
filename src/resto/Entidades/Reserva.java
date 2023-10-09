@@ -91,11 +91,12 @@ public class Reserva {
         this.estado = estado;
     }
 
-  
-
     @Override
     public String toString() {
         return "Reserva{" + "idReserva=" + idReserva + ", idMesa=" + idMesa + ", nombre=" + nombre + ", DNI=" + DNI + ", fecha=" + fecha + ", estado=" + estado + '}';
     }
+
+  
+
 
 }

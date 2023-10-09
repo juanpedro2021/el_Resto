@@ -25,16 +25,17 @@ public class ReservaData {
         String sql = "INSERT INTO reserva (idMesa, nombre, DNI, fecha, estado) VALUES (?, ?, ?, ?, ?)";
         try {
                 PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, reserva.getIdMesa());
-                ps.setString(2, reserva.getNombre());
-                ps.setInt(3, reserva.getDNI());
-                ps.setTimestamp(4, reserva.getFecha());
-                //ps.setInt(5, reserva.getEstado());
-                ps.setBoolean(5, reserva.isEstado());
-               
                 
+                ps.setInt(1, reserva.getIdMesa());               
+                ps.setString(2, reserva.getNombre());                
+                ps.setInt(3, reserva.getDNI());              
+                ps.setTimestamp(4, reserva.getFecha());
+                ps.setBoolean(5, reserva.isEstado());
+              
                 ps.executeUpdate();
+                
                 ResultSet rs = ps.getGeneratedKeys();
+                
                 
                 if (rs.next()){
 			reserva.setIdReserva(rs.getInt(1));
@@ -46,7 +47,66 @@ public class ReservaData {
 		}
 		}
     
+        public void modificarReserva(Reserva reserva){
+        
+       
+        String sql="UPDATE reserva SET idMesa=?, nombre =?, DNI=?, feha=? , estado=? WHERE idProducto=?";
+        
+       
+        
+       try{
+           PreparedStatement ps=con.prepareStatement(sql);
+           ps.setInt(1, reserva.getIdMesa());
+           ps.setString(2,reserva.getNombre());
+           ps.setInt(3, reserva.getDNI());
+           ps.setTimestamp(4, reserva.getFecha());
+           ps.setBoolean(5, reserva.isEstado());
+            
+            
+           // ResultSet rs = ps.getGeneratedKeys();
+            
+            	int exito = ps.executeUpdate();
+
+		if (exito == 1) {
+		
+		JOptionPane.showMessageDialog(null, "Modificado exitosamente");
+                
+                } else {
+                    
+		JOptionPane.showMessageDialog(null, "La reserva  no existe");
+		}
+
+            
+            ps.close();
+            
+       } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al modificar la reserva" +ex.getMessage()); 
+     }
+    }
     
+    
+    
+    
+        public void eliminarReserva(int id) {
+String sql = "UPDATE reserva SET estado = 0 WHERE idReserva = ? ";
+	try {
+		
+		PreparedStatement ps = con.prepareStatement (sql);
+		ps.setInt(1, id);
+		int fila=ps.executeUpdate();
+
+		if (fila==1) {
+			JOptionPane.showMessageDialog(null, "Se eliminó la reserva");
+		}
+		ps.close();
+		} catch (SQLException ex) {
+		JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva "+ ex.getMessage());
+		}
+	}
+        
+        
+        
+        
     public Reserva buscarReserva(int id){
 	Reserva reserva = null;
 	String sql = "SELECT idMesa, nombre, DNI, fecha FROM reserva WHERE idReserva = ? AND estado = 1";
@@ -76,4 +136,34 @@ public class ReservaData {
                 
     
 }
+        public Reserva buscarReservaPorDNI(int DNI){
+	Reserva reserva = null;
+	String sql = "SELECT idReserva,idMesa, nombre, fecha FROM reserva WHERe DNI = ? AND estado = 1";
+        
+	
+	try {
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, DNI);
+
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {
+		reserva=new Reserva();
+		reserva.setIdReserva(rs.getInt("idReserva"));
+		reserva.setNombre(rs.getString("Nombre"));
+                reserva.setFecha(rs.getTimestamp("Fecha"));
+		reserva.setEstado(true); 
+		
+		} else {
+			JOptionPane.showMessageDialog(null, "No existe la Reserva");
+		}
+		ps.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva "+ex.getMessage());
+		}
+		return reserva;
+                
+    
+}
+        
 }
