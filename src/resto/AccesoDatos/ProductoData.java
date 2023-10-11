@@ -119,5 +119,26 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
      }
     }
     
-    
+    public Producto buscarProducto(int idProducto) {
+        Producto producto=null;
+        try{
+            String sql ="SELECT * FROM Producto WHERE idProducto=?";
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idProducto);
+            ResultSet rs=ps.executeQuery();
+            
+            if(rs.next()){
+                producto = new Producto();
+                producto.setidProducto(rs.getInt("idProducto"));
+                producto.setEstado(rs.getBoolean("estado"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setCantidad(rs.getInt("cantidad"));
+                producto.setPrecio(rs.getDouble("precio"));            
+            }
+            ps.close();
+        }catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al buscar id Producto"+ex.getMessage()); 
+     }
+        return producto;
+    }
 }

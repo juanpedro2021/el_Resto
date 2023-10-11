@@ -104,8 +104,8 @@ public DetallePedido buscarDetalle(int id){
                 detalle.setPedido(pedido);
                 
                 // falta esto
-                //Producto producto = productod.buscarProducto(rs.getInt("idProducto"));
-                //detalle.setProducto(producto);
+                Producto producto = proD.buscarProducto(rs.getInt("idProducto"));
+                detalle.setProducto(producto);
                 
                 detalle.setCantidad(rs.getInt("cantidad"));           
 		
