@@ -32,15 +32,15 @@ public class ElResto {
   //                      estado,nombre,cantidad,precio
 //Producto salsa = new Producto(true,"salsa",12,200.2);
 //
-//Producto agua = new Producto(true,"agua mineral",3,200.2);
+Producto agua = new Producto(true,"agua mineral",3,200.2);
 //
-//ProductoData PD = new ProductoData();
+ProductoData PD = new ProductoData();
 //
 ////      ***agrego los productos
 //
 //PD.agregarProducto(salsa);
 
-//PD.agregarProducto(agua);
+PD.agregarProducto(agua);
 
 //      eliminar un producto
 

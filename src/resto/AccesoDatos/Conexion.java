@@ -33,6 +33,7 @@ public class Conexion {
             connection = DriverManager.getConnection(URL+DB + 
                     "?useLegacyDatetimecode=false&serverTimezone-UTC"+ "&user=" 
                     + USUARIO + "&password=" + PASSWORD) ;
+             JOptionPane.showMessageDialog(null, "Se conecto correctamente");
         }
         } catch (ClassNotFoundException ex) {
           JOptionPane.showMessageDialog(null, "error a cargar driver = " + ex.getLocalizedMessage());
@@ -41,7 +42,7 @@ public class Conexion {
             JOptionPane.showMessageDialog(null, "error de conexion = " + co.getLocalizedMessage());
             
         }
-        JOptionPane.showMessageDialog(null, "Se conecto correctamente");
+       
         
         return connection;
     }
