@@ -29,15 +29,15 @@ public class ElResto {
 
 //         *** creo pruductos
 //forma de el constructor  
-//                        estado,nombre,cantidad,precio
+  //                      estado,nombre,cantidad,precio
 //Producto salsa = new Producto(true,"salsa",12,200.2);
-
+//
 //Producto agua = new Producto(true,"agua mineral",3,200.2);
-
+//
 //ProductoData PD = new ProductoData();
-
-//      ***agrego los productos
-
+//
+////      ***agrego los productos
+//
 //PD.agregarProducto(salsa);
 
 //PD.agregarProducto(agua);
@@ -63,6 +63,17 @@ public class ElResto {
 
 //MesaData md = new MesaData();
 
+//****pruebo buscar mesa
+
+//Mesa me =new Mesa();
+//me=md.buscarMesa(4);
+//me.toString();
+//
+//    System.out.println("numero"+me.getNumMesa());
+//    
+//    System.out.println("capacidad" +me.getCapacidad());
+//    
+//    System.out.println("estado "+ me.getEstado());
 
 //mesa.setNumMesa(6);
 //mesa.setCapacidad(10);
@@ -141,6 +152,18 @@ public class ElResto {
 //
 //meserod.modificarMesero(mesero3);
 
+//pruebo buscar mesero
+
+//Mesero mesero =new Mesero();
+//mesero=meserod.buscarMesero(1);
+//mesero.toString();
+//
+//    System.out.println("nombre "+mesero.getNombre());
+//    
+//    System.out.println("contra " +mesero.getPassword());
+//    
+//    System.out.println("usuario "+ mesero.getUser());
+
 
 //                  *** PRUEBA ReservaData *****
 
@@ -190,6 +213,8 @@ public class ElResto {
 //    System.out.println("estado "+ reserva3.isEstado());
 //
 
+
+//                  *** PRUEBA PedidoData *****
 
     }
     

@@ -84,17 +84,42 @@ String sql = "UPDATE mesero SET estado = 0 WHERE idMesero = ? ";
 		} catch (SQLException ex) {
 		JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero "+ ex.getMessage());
 		}
+        }
+        
+
+ public Mesero buscarMesero(int id){
+	Mesero mesero = null;
+     
+	String sql = "SELECT nombre , user , password FROM mesero WHERE idMesero = ?";
+	PreparedStatement ps = null;
+	try {
+		ps = (PreparedStatement) con.prepareStatement(sql);
+                
+                // le paso el id 
+		ps.setInt(1, id);
+
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()){
+		mesero=new Mesero();
+		mesero.setIdMesero(id);
+                mesero.setNombre(rs.getString("nombre"));
+                mesero.setUser(rs.getString("user"));
+                mesero.setPassword(rs.getString("password"));
+             
+             
+		
+		} else {
+			JOptionPane.showMessageDialog(null, "No existe el Mesero");
+		}
+		ps.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero "+ex.getMessage());
+		}
+		return mesero;
+		}         
+        
 	}
+
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-}
+

@@ -87,6 +87,39 @@ String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ? ";
 		JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa "+ex.getMessage());
 		}
 		}
+  
+  
+ public Mesa buscarMesa(int id){
+	Mesa mesa = null;
+     
+	String sql = "SELECT numMesa, capacidad , estado FROM mesa WHERE idMesa = ? AND estado  IN (2,3)";
+	PreparedStatement ps = null;
+	try {
+		ps = (PreparedStatement) con.prepareStatement(sql);
+                
+                // le paso el id 
+		ps.setInt(1, id);
+
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()){
+		mesa=new Mesa();
+		mesa.setIdMesa(id);
+                mesa.setNumMesa(rs.getInt("numMesa"));
+                mesa.setEstado(rs.getInt("estado"));
+                mesa.setCapacidad(rs.getInt("capacidad"));
+             
+		
+		} else {
+			JOptionPane.showMessageDialog(null, "No existe la Mesa");
+		}
+		ps.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa "+ex.getMessage());
+		}
+		return mesa;
+		} 
+  
 
  	public List <Mesa> listarMesasReservadas() {
 
@@ -147,7 +180,7 @@ String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ? ";
 		}
 		return mesas;
 		}
-  
-    }
+        
+        }
 
 
