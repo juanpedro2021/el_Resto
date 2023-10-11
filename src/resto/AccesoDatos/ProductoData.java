@@ -36,7 +36,7 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
 		}
 	}
     
-     public List<Producto> obtenerProducto() {
+     public List<Producto> listarProductos() {
        List <Producto> productos=new ArrayList<>();
        String sql = "SELECT * from producto";
        try{

@@ -4,12 +4,16 @@ package Principal;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import resto.AccesoDatos.Conexion;
+import resto.AccesoDatos.DetallePedidoData;
 import resto.AccesoDatos.MesaData;
 import resto.AccesoDatos.MeseroData;
+import resto.AccesoDatos.PedidoData;
 import resto.AccesoDatos.ProductoData;
 import resto.AccesoDatos.ReservaData;
+import resto.Entidades.DetallePedido;
 import resto.Entidades.Mesa;
 import resto.Entidades.Mesero;
+import resto.Entidades.Pedido;
 import resto.Entidades.Producto;
 import resto.Entidades.Reserva;
 
@@ -32,7 +36,7 @@ public class ElResto {
   //                      estado,nombre,cantidad,precio
 //Producto salsa = new Producto(true,"salsa",12,200.2);
 //
-Producto agua = new Producto(true,"agua mineral",3,200.2);
+//Producto agua = new Producto(true,"agua mineral",3,200.2);
 //
 ProductoData PD = new ProductoData();
 //
@@ -40,7 +44,7 @@ ProductoData PD = new ProductoData();
 //
 //PD.agregarProducto(salsa);
 
-PD.agregarProducto(agua);
+//PD.agregarProducto(agua);
 
 //      eliminar un producto
 
@@ -54,6 +58,20 @@ PD.agregarProducto(agua);
 //
 //PD.modificarProducto(salsa);
 
+// busco un producto
+//Producto p = new Producto();
+//
+//p=PD.buscarProducto(5);
+//        System.out.println(""+ p.toString());
+
+//listo todos los productos
+
+//for(Producto produ: PD.listarProductos()){
+// 
+//
+//    System.out.println(""+produ.toString());
+//
+//    }
 
 //                  *** PRUEBA MesaData *****
 
@@ -183,7 +201,7 @@ PD.agregarProducto(agua);
 //Reserva reserva2 = new Reserva(2,"nilda",456789,time2,true);
 //
 //ReservaData rd = new ReservaData();
-//
+////
 ////agrego las reservas
 //
 //rd.guardarReserva(reserva);
@@ -194,6 +212,10 @@ PD.agregarProducto(agua);
 
 //rd.eliminarReserva(12);
 
+
+//// modifico reserva
+//Reserva reserva5 = new Reserva(14,2,"martha",456789,time,true);
+//rd.modificarReserva(reserva5);
 // busco una reserva
 
 //Reserva reserva3 = new Reserva();
@@ -214,7 +236,31 @@ PD.agregarProducto(agua);
 //
 
 
-//                  *** PRUEBA PedidoData *****
+////                  *** PRUEBA DetallePedidoData *****
+
+//pido 2 aguas mineral
+
+
+// ***********************  VER BIEN ESTO***********
+
+ProductoData pd= new ProductoData();
+Producto produ = new Producto();
+
+DetallePedido detalle = new DetallePedido();
+DetallePedidoData detalled = new DetallePedidoData();
+
+PedidoData pedidod = new PedidoData();
+Pedido pedido = new Pedido();
+
+produ = pd.buscarProducto(5);
+detalle.setProducto(produ);
+detalle.setCantidad(2);
+//detalle.setPedido(pedido.get);
+
+detalled.agregarDetallePedido(detalle);
+
+
+
 
     }
     

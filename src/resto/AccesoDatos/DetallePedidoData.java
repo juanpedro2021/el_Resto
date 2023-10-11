@@ -61,8 +61,7 @@ public class DetallePedidoData {
 		}
     }
     
-    
-     public void modificarDetallePedido(DetallePedido detallePedido) {
+    public void modificarDetallePedido(DetallePedido detallePedido) {
        
           String sql = "UPDATE DetallePedido SET idPedido = ?, idProducto = ?, Cantidad = ? WHERE idDetallePedido = ?";
          
@@ -81,9 +80,8 @@ public class DetallePedidoData {
 		JOptionPane.showMessageDialog(null, "Error al modificar detalle "+ ex.getMessage());
 		}
     }
-
-     
-public DetallePedido buscarDetalle(int id){
+ 
+    public DetallePedido buscarDetalle(int id){
 	DetallePedido detalle = null;
      
 	String sql = "SELECT idPedido, idProducto , cantidad FROM mesa WHERE idDetallePedido = ? ";

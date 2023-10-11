@@ -50,21 +50,19 @@ public class ReservaData {
         public void modificarReserva(Reserva reserva){
         
        
-        String sql="UPDATE reserva SET idMesa=?, nombre =?, DNI=?, feha=? , estado=? WHERE idProducto=?";
-        
-       
+        String sql="UPDATE reserva SET idMesa=?, nombre =?, DNI=?, fecha=? , estado=? WHERE idReserva=?";
         
        try{
            PreparedStatement ps=con.prepareStatement(sql);
+           
            ps.setInt(1, reserva.getIdMesa());
            ps.setString(2,reserva.getNombre());
            ps.setInt(3, reserva.getDNI());
            ps.setTimestamp(4, reserva.getFecha());
            ps.setBoolean(5, reserva.isEstado());
+           ps.setInt(6, reserva.getIdReserva());
             
-            
-           // ResultSet rs = ps.getGeneratedKeys();
-            
+
             	int exito = ps.executeUpdate();
 
 		if (exito == 1) {
@@ -77,7 +75,7 @@ public class ReservaData {
 		}
 
             
-            ps.close();
+            //ps.close();
             
        } catch (SQLException ex) {
          JOptionPane.showMessageDialog(null, "error al modificar la reserva" +ex.getMessage()); 
