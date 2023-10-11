@@ -7,9 +7,14 @@ package resto.AccesoDatos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import resto.Entidades.DetallePedido;
+import resto.Entidades.Pedido;
+import resto.Entidades.Producto;
 
 /**
  *
@@ -17,6 +22,8 @@ import resto.Entidades.DetallePedido;
  */
 public class DetallePedidoData {
     private Connection con = null;
+    private PedidoData pd=new PedidoData();
+    private ProductoData proD=new ProductoData();
     
     public DetallePedidoData(){
         con = Conexion.getConexion();
@@ -75,4 +82,40 @@ public class DetallePedidoData {
 		}
     }
 
+     
+public DetallePedido buscarDetalle(int id){
+	DetallePedido detalle = null;
+     
+	String sql = "SELECT idPedido, idProducto , cantidad FROM mesa WHERE idDetallePedido = ? ";
+	PreparedStatement ps = null;
+	try {
+		ps = (PreparedStatement) con.prepareStatement(sql);
+                
+                // le paso el id 
+		ps.setInt(1, id);
+
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()){
+                   //ver aca porque tengo que poner nombre diferentes a los detalles marcados en rojo
+		detalle=new DetallePedido();
+                detalle.setIdDtallePedido(id);
+                Pedido pedido = pd.buscarPedido(rs.getInt("idPedido"));
+                detalle.setPedido(pedido);
+                
+                // falta esto
+                //Producto producto = productod.buscarProducto(rs.getInt("idProducto"));
+                //detalle.setProducto(producto);
+                
+                detalle.setCantidad(rs.getInt("cantidad"));           
+		
+		} else {
+			JOptionPane.showMessageDialog(null, "No existe el detalle");
+		}
+		ps.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla detalle pedido "+ex.getMessage());
+		}
+		return detalle;
+		} 
 }

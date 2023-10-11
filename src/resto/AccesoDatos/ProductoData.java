@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -61,7 +62,7 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
         String sql="INSERT INTO producto (estado, nombre, cantidad, precio) VALUES (?, ?, ?, ?)";
         
         try{
-            PreparedStatement ps= con.prepareStatement(sql);
+            PreparedStatement ps= con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS );
             ps.setBoolean(1, producto.isEstado());
             ps.setString(2, producto.getNombre());
             ps.setInt(3, producto.getCantidad());
@@ -117,4 +118,6 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
          JOptionPane.showMessageDialog(null, "error al modificar Producto"+ex.getMessage()); 
      }
     }
+    
+    
 }
