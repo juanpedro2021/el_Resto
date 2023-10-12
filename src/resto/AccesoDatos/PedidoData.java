@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package resto.AccesoDatos;
 
 import java.sql.Connection;
@@ -38,18 +34,17 @@ public class PedidoData {
     
  
      public void guardarPedido(Pedido pedido){
-            String sql = "INSERT INTO pedido(idMesa , idMesero , idDetallePedido , fecha , estado , importe, hora) Values(?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO pedido(idMesa , idMesero , fecha , estado , importe, hora) Values(?,?,?,?,?,?)";
            
       try {
           PreparedStatement ps = con.prepareStatement (sql, Statement.RETURN_GENERATED_KEYS);
           
           ps.setInt(1,pedido.getMesa().getIdMesa());
           ps.setInt(2, pedido.getMesero().getIdMesero());
-          ps.setInt(3, pedido.getDetallepedido().getIdDtallePedido());
-          ps.setDate(4, Date.valueOf(pedido.getFecha()));           //localDate a Date
-          ps.setBoolean(5,pedido.isEstado());
-          ps.setDouble(6 , pedido.getImporte());
-          ps.setTime(7, pedido.getHora());
+          ps.setDate(3, Date.valueOf(pedido.getFecha()));           //localDate a Date
+          ps.setBoolean(4,pedido.isEstado());
+          ps.setDouble(5 , pedido.getImporte());
+          ps.setTime(6, pedido.getHora());
           
           ps.executeUpdate();
           ResultSet rs = ps.getGeneratedKeys();
@@ -86,19 +81,19 @@ public class PedidoData {
 	}
     
     public void modificarPedido(Pedido pedido){
-            String sql = "UPDATE pedido SET idMesa =?, idMesero=?, idDetallePedido=?, fecha=?, estado=?, importe=?,hora=? WHERE idPedido=?";
+            String sql = "UPDATE pedido SET idMesa =?, idMesero=?, fecha=?, estado=?, importe=?,hora=? WHERE idPedido=?";
            
       try {
           PreparedStatement ps = con.prepareStatement (sql, Statement.RETURN_GENERATED_KEYS);
           
           ps.setInt(1,pedido.getMesa().getIdMesa());
           ps.setInt(2, pedido.getMesero().getIdMesero());
-          ps.setInt(3, pedido.getDetallepedido().getIdDtallePedido());
-          ps.setDate(4, Date.valueOf(pedido.getFecha()));           //localDate a Date
-          ps.setBoolean(5,pedido.isEstado());
-          ps.setDouble(6 , pedido.getImporte());
-          ps.setTime(7, pedido.getHora());
-          ps.setInt(8, pedido.getIdPedido());
+          //ps.setInt(3, pedido.getDetallepedido().getIdDtallePedido());
+          ps.setDate(3, Date.valueOf(pedido.getFecha()));           //localDate a Date
+          ps.setBoolean(4,pedido.isEstado());
+          ps.setDouble(5 , pedido.getImporte());
+          ps.setTime(6, pedido.getHora());
+          ps.setInt(7, pedido.getIdPedido());
           
            int  exito = ps.executeUpdate();
           
@@ -134,9 +129,6 @@ public class PedidoData {
                 Mesero mesero = meserod.buscarMesero(rs.getInt("idMesero"));
                 pedido.setMesa(m);
                 pedido.setMesero(mesero);
-                
-                //falta el id pdetealle pedido
-                
                 pedido.setFecha((rs.getDate("fecha")).toLocalDate());
                 pedido.setEstado(true);
                 pedido.setImporte(rs.getInt("importe"));
@@ -156,7 +148,7 @@ public class PedidoData {
     
     public Pedido buscarPedido(int id){
 	Pedido pedido = null;
-	String sql = "SELECT idMesa , idMesero , idDetallePedido , fecha , estado , importe, hora FROM pedido WHERE idPedido = ? AND estado = 1";
+	String sql = "SELECT idMesa , idMesero , fecha , estado , importe, hora FROM pedido WHERE idPedido = ? AND estado = 1";
 
 	
 	try {
@@ -175,10 +167,6 @@ public class PedidoData {
                 Mesero mesero = meserod.buscarMesero(rs.getInt("idMesero"));
                 pedido.setMesa(m);
                 pedido.setMesero(mesero);
-                
-              // busco el detallepedido con ese id y la agrego
-                DetallePedido dp = detalled.buscarDetalle(rs.getInt("idDetallePedido"));
-                pedido.setDetallepedido(dp);
                 
               // busco la fecha y la agrego
                 pedido.setFecha((rs.getDate("fecha")).toLocalDate());

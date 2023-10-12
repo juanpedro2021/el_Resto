@@ -240,11 +240,11 @@ ProductoData PD = new ProductoData();
 
 //pido 2 aguas mineral
 
-
-// ***********************  VER BIEN ESTO***********
-
+// creo un producto
 ProductoData pd= new ProductoData();
 Producto produ = new Producto();
+
+// creo un detalle pedido
 
 DetallePedido detalle = new DetallePedido();
 DetallePedidoData detalled = new DetallePedidoData();
@@ -252,9 +252,12 @@ DetallePedidoData detalled = new DetallePedidoData();
 PedidoData pedidod = new PedidoData();
 Pedido pedido = new Pedido();
 
+//busco el producto y lo agrego
+
 produ = pd.buscarProducto(5);
 detalle.setProducto(produ);
 detalle.setCantidad(2);
+
 //detalle.setPedido(pedido.get);
 
 detalled.agregarDetallePedido(detalle);
