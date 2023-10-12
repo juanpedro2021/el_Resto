@@ -47,7 +47,7 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
                int id= rs.getInt("idProducto");
                boolean estado= rs.getBoolean("estado");
                String nombre= rs.getString("nombre");
-               int cantidad= rs.getInt("cantidad");
+               int cantidad= rs.getInt("stock");
                double precio = rs.getDouble("precio");
                productos.add(new Producto(id,estado,nombre,cantidad,precio));
            }
@@ -59,7 +59,7 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
      
      
      public void agregarProducto(Producto producto){
-        String sql="INSERT INTO producto (estado, nombre, cantidad, precio) VALUES (?, ?, ?, ?)";
+        String sql="INSERT INTO producto (estado, nombre, stock, precio) VALUES (?, ?, ?, ?)";
         
         try{
             PreparedStatement ps= con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS );
@@ -86,7 +86,7 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
     public void modificarProducto(Producto producto){
         
        
-        String sql="UPDATE producto SET estado=?, nombre =?, cantidad=?, precio=? WHERE idProducto=?";
+        String sql="UPDATE producto SET estado=?, nombre =?, stock=?, precio=? WHERE idProducto=?";
         
         
        try{
@@ -132,7 +132,7 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
                 producto.setidProducto(rs.getInt("idProducto"));
                 producto.setEstado(rs.getBoolean("estado"));
                 producto.setNombre(rs.getString("nombre"));
-                producto.setCantidad(rs.getInt("cantidad"));
+                producto.setCantidad(rs.getInt("stock"));
                 producto.setPrecio(rs.getDouble("precio"));            
             }
             ps.close();
