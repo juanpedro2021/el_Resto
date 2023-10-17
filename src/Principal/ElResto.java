@@ -2,7 +2,9 @@
 package Principal;
 
 import java.sql.Connection;
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import resto.AccesoDatos.Conexion;
 import resto.AccesoDatos.DetallePedidoData;
 import resto.AccesoDatos.MesaData;
@@ -34,42 +36,57 @@ public class ElResto {
 //         *** creo pruductos
 //forma de el constructor  
   //                      estado,nombre,cantidad,precio
-//Producto salsa = new Producto(true,"salsa",12,200.2);
+// Producto produ = new Producto();
+// Producto produ1 = new Producto();
+// Producto produ2 = new Producto();
+//  ProductoData PD = new ProductoData();
+//  
+//  // creo un producto
+//  
+//produ.setEstado(true);
+//produ.setNombre("Lomito");
+//produ.setCantidad(15);
+//produ.setPrecio(1500.0);
+//PD.agregarProducto(produ);
 //
-//Producto agua = new Producto(true,"agua mineral",3,200.2);
+//produ1.setEstado(true);
+//produ1.setNombre("Pizza");
+//produ1.setCantidad(20);
+//produ1.setPrecio(1000.0);
+//PD.agregarProducto(produ1);
 //
-//ProductoData PD = new ProductoData();
+//produ2.setEstado(true);
+//produ2.setNombre("Hamburguesa");
+//produ2.setCantidad(10);
+//produ2.setPrecio(700.0);
+//PD.agregarProducto(produ2);
 //
-////      ***agrego los productos
 //
-//PD.agregarProducto(salsa);
-
-//PD.agregarProducto(agua);
-
-//      eliminar un producto
-
-//int idagua = 1 ;
 //
-//PD.eliminarProducto(idagua);
-
-//      *** modifico el producto con el id=1***
-        
-//Producto salsa = new Producto(1,true,"salsa",10,45.0);
+////      eliminar un producto
 //
+//int idsalsa = 1 ;
+//
+//PD.eliminarProducto(idsalsa);
+//
+////      *** modifico el producto con el id=1***
+//        
+//Producto salsa = new Producto(3,true,"aceite",5,500.0);
+////
 //PD.modificarProducto(salsa);
-
-// busco un producto
-//Producto p = new Producto();
 //
+//// busco un producto
+//Producto p = new Producto();
+////
 //p=PD.buscarProducto(5);
 //        System.out.println(""+ p.toString());
-
-//listo todos los productos
-
-//for(Producto produ: PD.listarProductos()){
+//
+////listo todos los productos
+//
+//for(Producto prod: PD.listarProductos()){
 // 
 //
-//    System.out.println(""+produ.toString());
+//    System.out.println(""+prod.toString());
 //
 //    }
 
@@ -154,7 +171,7 @@ public class ElResto {
 //
 //Mesero mesero2 = new Mesero("pedro","p23","pedro12345", true);
 //
-MeseroData meserod = new MeseroData();
+//MeseroData meserod = new MeseroData();
 //// guardo los meseros
 //
 //meserod.guardarMesero(mesero);
@@ -172,15 +189,11 @@ MeseroData meserod = new MeseroData();
 
 //pruebo buscar mesero
 
-Mesero mesero =new Mesero();
-mesero=meserod.buscarMesero(4);
-mesero.toString();
+//Mesero mesero =new Mesero();
+//mesero=meserod.buscarMesero(1);
+//        System.out.println("" + mesero.toString());
 
-    System.out.println("nombre "+mesero.getNombre());
-    
-    System.out.println("contra " +mesero.getPassword());
-    
-    System.out.println("usuario "+ mesero.getUser());
+
 
 
 //                  *** PRUEBA ReservaData *****
@@ -188,24 +201,24 @@ mesero.toString();
 
 // guardo una reserva
 //
-//String fecha= "2023-10-10 15:30:00";
-//
-//Timestamp time = Timestamp.valueOf(fecha);
-//
-//String fecha2= "2021-10-10 20:30:00";
-//
-//Timestamp time2 = Timestamp.valueOf(fecha2);
-//
-//Reserva reserva = new Reserva(1,"jorge",12345,time,true);
-//
-//Reserva reserva2 = new Reserva(2,"nilda",456789,time2,true);
-//
-//ReservaData rd = new ReservaData();
+//String fecha= "2023-10-10 17:30:00";
 ////
-////agrego las reservas
-//
+//Timestamp time = Timestamp.valueOf(fecha);
+////
+////String fecha2= "2021-10-10 20:30:00";
+////
+////Timestamp time2 = Timestamp.valueOf(fecha2);
+////
+//Reserva reserva = new Reserva(4,"jorge",12345,time,true);
+////
+////Reserva reserva2 = new Reserva(2,"nilda",456789,time2,true);
+////
+//ReservaData rd = new ReservaData();
+//////
+//////agrego las reservas
+////
 //rd.guardarReserva(reserva);
-//rd.guardarReserva(reserva2);
+////rd.guardarReserva(reserva2);
 
 
 //elimino una reserva
@@ -216,6 +229,7 @@ mesero.toString();
 //// modifico reserva
 //Reserva reserva5 = new Reserva(14,2,"martha",456789,time,true);
 //rd.modificarReserva(reserva5);
+
 // busco una reserva
 
 //Reserva reserva3 = new Reserva();
@@ -236,44 +250,58 @@ mesero.toString();
 //
 
 
-////                  *** PRUEBA DetallePedidoData *****
+/////////////***PRUEBA PEDIDODATA**/////////////7
+MesaData md = new MesaData();
+MeseroData meserod = new MeseroData();
+ProductoData pd = new ProductoData();
 
-//pido 2 aguas mineral
 
-// creo un producto
-//ProductoData pd= new ProductoData();
-//Producto produ = new Producto();
-//
-//produ.setEstado(true);
-//produ.setNombre("Lomito");
-//produ.setCantidad(15);
-//produ.setPrecio(1500.0);
-//pd.agregarProducto(produ);
-//
+Pedido pedido=new Pedido();
+
+pedido.setMesa(md.buscarMesa(2));
+pedido.setMesero(meserod.buscarMesero(1));
+
+pedido.setFecha(LocalDate.of(2023, 10, 25));
+pedido.setEstado(true);
+pedido.setImporte(900.50);
+ String hora = ("19:01:46"); 
+pedido.setHora(Time.valueOf(hora));
+
+pedido.setProducto(pd.buscarProducto(8));
+
+        //System.out.println("antes ");
+PedidoData pedidod = new PedidoData();
+       // System.out.println("casi");
+//pedidod.guardarPedido(pedido);
+
+        //System.out.println("agego");
+   }
+    
+    ////                  *** PRUEBA DetallePedidoData *****
+
+
+
 //// creo un detalle pedido
 //
 //DetallePedido detalle = new DetallePedido();
-//DetallePedidoData detalled = new DetallePedidoData();
-//
-//PedidoData pedidod = new PedidoData();
-//Pedido pedido = new Pedido();
-//
+  //      System.out.println("1");
+
 ////busco el producto y lo agrego
 //
-//produ = pd.buscarProducto(5);
+//Producto produ = new Producto();
+// System.out.println("2");
+//ProductoData pd = new ProductoData();
+// System.out.println("3");
+//produ = pd.buscarProducto(6);
+// System.out.println("4");
 //detalle.setProducto(produ);
+// System.out.println("5");
 //detalle.setCantidad(2);
+// System.out.println("6");
 //
-////detalle.setPedido(pedido.get);
-//
+//DetallePedidoData detalled = new DetallePedidoData();
+//System.out.println("7");
 //detalled.agregarDetallePedido(detalle);
-
-
-
-/////////////******PRUEBA PEDIDODATA*****/////////////7
-
-//Pedido pedido=new Pedido();
-//pedido.setMesa(1);
+//System.out.println("8");
     }
-    
-}
+

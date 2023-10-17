@@ -1,13 +1,16 @@
 
 package resto.Vistas;
 
-import resto.AccesoDatos.Loginete;
-import resto.AccesoDatos.LogineteData;
+import packLoginete.Loginetee;
+import packLoginete.LogineteeData;
+
+
+
 
 
 public class FrmLogin extends javax.swing.JFrame {
-            Loginete lg= new Loginete();
-            LogineteData login= new LogineteData();
+            Loginetee lg= new Loginetee();
+            LogineteeData login= new LogineteeData();
    
     public FrmLogin() {
         initComponents();
@@ -20,12 +23,12 @@ public class FrmLogin extends javax.swing.JFrame {
         if(!"".equals(user) || !"".equals(pass)){
 //            login lg= new login();
 //            LogineteData login= new LogineteData(); estos 2 renglones los meti en linea 8 y 9
-            lg = login.log(user, pass);
+           // lg = login.log(user, pass);
             if(lg.getUser() !=null && lg.getPassword() != null){
                     
                     
-                Sistema sis=new Sistema();
-                sis.setVisible (true);
+                //Sistema sis=new Sistema();
+                //sis.setVisible (true);
                 dispose();
                 
             }

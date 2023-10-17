@@ -22,7 +22,7 @@ import resto.Entidades.Producto;
  */
 public class DetallePedidoData {
     private Connection con = null;
-    private PedidoData pd=new PedidoData();
+   
     private ProductoData proD=new ProductoData();
     
     public DetallePedidoData(){
@@ -83,6 +83,7 @@ public class DetallePedidoData {
  
     public DetallePedido buscarDetalle(int id){
 	DetallePedido detalle = null;
+        PedidoData pd=new PedidoData();
      
 	String sql = "SELECT idPedido, idProducto , cantidad FROM mesa WHERE idDetallePedido = ? ";
 	PreparedStatement ps = null;

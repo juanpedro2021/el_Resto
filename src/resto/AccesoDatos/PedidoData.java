@@ -29,28 +29,53 @@ public class PedidoData {
     private MesaData md = new MesaData();
     private MeseroData meserod = new MeseroData();
     private DetallePedidoData  detalled = new DetallePedidoData();
+    
     public void PedidoData(){
+        System.out.println("anda?"+con);
         con= Conexion.getConexion();
+        
     }
     
     
     
  
      public void guardarPedido(Pedido pedido){
-           String sql = "INSERT INTO pedido(idMesa , idMesero , fecha , estado , importe, hora) Values(?,?,?,?,?,?,?)";
-           
+         // muestro el pedido antes de que lo guarde
+         System.out.println(""+ pedido.toString());
+         
+           String sql = "INSERT INTO pedido(idMesa , idMesero , fecha , estado , importe, hora) Values(?,?,?,?,?,?)";
+           System.out.println("1");
       try {
-          PreparedStatement ps = con.prepareStatement (sql, Statement.RETURN_GENERATED_KEYS);
+         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+          
+          System.out.println("2");
           
           ps.setInt(1,pedido.getMesa().getIdMesa());
+          
+          System.out.println("3");
+          
           ps.setInt(2, pedido.getMesero().getIdMesero());
-          ps.setDate(3, Date.valueOf(pedido.getFecha()));           //localDate a Date
+          
+          System.out.println("4");
+          
+          ps.setDate(3, Date.valueOf(pedido.getFecha()));  
+          //localDate a Date
+          System.out.println("5");
           ps.setBoolean(4,pedido.isEstado());
+          
+          System.out.println("6");
+          
           ps.setDouble(5 , pedido.getImporte());
+          
+          System.out.println("7");
+          
           ps.setTime(6, pedido.getHora());
           
+          System.out.println("8");
           ps.executeUpdate();
+          System.out.println("9");
           ResultSet rs = ps.getGeneratedKeys();
+          System.out.println("10");
           
           if (rs.next()){
 			pedido.setIdPedido(rs.getInt(1));

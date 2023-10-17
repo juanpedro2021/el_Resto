@@ -16,22 +16,22 @@ public class FrmLoginn extends javax.swing.JFrame {
     }
     
     public void validar(){
-        String user = jtfUsuario.getText();
-        String pass = String.valueOf(jtfPass.getText());
-        if(!"".equals(user) || !"".equals(pass)){
-//            login lg= new login();
-//            LogineteData login= new LogineteData(); estos 2 renglones los meti en linea 8 y 9
-            lg = login.log(user, pass);
-            if(lg.getUser() !=null && lg.getPassword() != null){
-                    
-                    
-                Sistema sis=new Sistema();
-                sis.setVisible (true);
-                dispose();
-                
-            }
-            
-        }
+//        String user = jtfUsuario.getText();
+//        String pass = String.valueOf(jtfPass.getText());
+//        if(!"".equals(user) || !"".equals(pass)){
+////            login lg= new login();
+////            LogineteData login= new LogineteData(); estos 2 renglones los meti en linea 8 y 9
+//            lg = login.log(user, pass);
+//            if(lg.getUser() !=null && lg.getPassword() != null){
+//                    
+//                    
+//                //Sistema sis=new Sistema();
+//                //sis.setVisible (true);
+//                dispose();
+//                
+//            }
+//            
+//        }
         
     }
 

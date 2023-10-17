@@ -38,14 +38,14 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
     
      public List<Producto> listarProductos() {
        List <Producto> productos=new ArrayList<>();
-       String sql = "SELECT * from producto";
+       String sql = "SELECT * from producto WHERE estado = 1";
        try{
            PreparedStatement ps= con.prepareStatement(sql);
            ResultSet rs=ps.executeQuery();
            
            while(rs.next()){
                int id= rs.getInt("idProducto");
-               boolean estado= rs.getBoolean("estado");
+               boolean estado= (true);
                String nombre= rs.getString("nombre");
                int cantidad= rs.getInt("stock");
                double precio = rs.getDouble("precio");
