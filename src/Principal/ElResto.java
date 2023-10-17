@@ -38,7 +38,7 @@ public class ElResto {
 //
 //Producto agua = new Producto(true,"agua mineral",3,200.2);
 //
-ProductoData PD = new ProductoData();
+//ProductoData PD = new ProductoData();
 //
 ////      ***agrego los productos
 //
@@ -78,7 +78,7 @@ ProductoData PD = new ProductoData();
 
 //Mesa mesa=new Mesa();
 //Mesa mesa2 = new Mesa();
-
+//
 //MesaData md = new MesaData();
 
 //****pruebo buscar mesa
@@ -96,15 +96,15 @@ ProductoData PD = new ProductoData();
 //mesa.setNumMesa(6);
 //mesa.setCapacidad(10);
 //mesa.setEstado(3);
-
+//
 //mesa2.setNumMesa(3);
 //mesa2.setCapacidad(5);
 //mesa2.setEstado(3);
-
-
-
-// agrego 2 mesas
-
+//
+//
+//
+//// agrego 2 mesas
+//
 //md.guardarMesa(mesa);
 //md.guardarMesa(mesa2);
 
@@ -149,7 +149,7 @@ ProductoData PD = new ProductoData();
 
 
 /////creo meseros
-//
+////
 //Mesero mesero = new Mesero("pepe","pepe23","2023");
 //
 //Mesero mesero2 = new Mesero("pedro","p23","pedro12345");
@@ -241,30 +241,39 @@ ProductoData PD = new ProductoData();
 //pido 2 aguas mineral
 
 // creo un producto
-ProductoData pd= new ProductoData();
-Producto produ = new Producto();
+//ProductoData pd= new ProductoData();
+//Producto produ = new Producto();
+//
+//produ.setEstado(true);
+//produ.setNombre("Lomito");
+//produ.setCantidad(15);
+//produ.setPrecio(1500.0);
+//pd.agregarProducto(produ);
+//
+//// creo un detalle pedido
+//
+//DetallePedido detalle = new DetallePedido();
+//DetallePedidoData detalled = new DetallePedidoData();
+//
+//PedidoData pedidod = new PedidoData();
+//Pedido pedido = new Pedido();
+//
+////busco el producto y lo agrego
+//
+//produ = pd.buscarProducto(5);
+//detalle.setProducto(produ);
+//detalle.setCantidad(2);
+//
+////detalle.setPedido(pedido.get);
+//
+//detalled.agregarDetallePedido(detalle);
 
-// creo un detalle pedido
-
-DetallePedido detalle = new DetallePedido();
-DetallePedidoData detalled = new DetallePedidoData();
-
-PedidoData pedidod = new PedidoData();
-Pedido pedido = new Pedido();
-
-//busco el producto y lo agrego
-
-produ = pd.buscarProducto(5);
-detalle.setProducto(produ);
-detalle.setCantidad(2);
-
-//detalle.setPedido(pedido.get);
-
-detalled.agregarDetallePedido(detalle);
 
 
+/////////////******PRUEBA PEDIDODATA*****/////////////7
 
-
+Pedido pedido=new Pedido();
+pedido.setMesa(1);
     }
     
 }
