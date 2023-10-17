@@ -37,7 +37,7 @@ public class PedidoData {
     
  
      public void guardarPedido(Pedido pedido){
-            String sql = "INSERT INTO pedido(idMesa , idMesero , fecha , estado , importe) Values(?,?,?,?,?,?)";
+           String sql = "INSERT INTO pedido(idMesa , idMesero , fecha , estado , importe, hora) Values(?,?,?,?,?,?,?)";
            
       try {
           PreparedStatement ps = con.prepareStatement (sql, Statement.RETURN_GENERATED_KEYS);
@@ -47,7 +47,7 @@ public class PedidoData {
           ps.setDate(3, Date.valueOf(pedido.getFecha()));           //localDate a Date
           ps.setBoolean(4,pedido.isEstado());
           ps.setDouble(5 , pedido.getImporte());
-         
+          ps.setTime(6, pedido.getHora());
           
           ps.executeUpdate();
           ResultSet rs = ps.getGeneratedKeys();
@@ -84,7 +84,7 @@ public class PedidoData {
 	}
     
     public void modificarPedido(Pedido pedido){
-            String sql = "UPDATE pedido SET idMesa =?, idMesero=?, fecha=?, estado=?, importe=? WHERE idPedido=?";
+            String sql = "UPDATE pedido SET idMesa =?, idMesero=?, fecha=?, estado=?, importe=?,hora=? WHERE idPedido=?";
            
       try {
           PreparedStatement ps = con.prepareStatement (sql, Statement.RETURN_GENERATED_KEYS);
@@ -95,7 +95,7 @@ public class PedidoData {
           ps.setDate(3, Date.valueOf(pedido.getFecha()));           //localDate a Date
           ps.setBoolean(4,pedido.isEstado());
           ps.setDouble(5 , pedido.getImporte());
-         
+          ps.setTime(6, pedido.getHora());
           ps.setInt(7, pedido.getIdPedido());
           
            int  exito = ps.executeUpdate();
@@ -135,7 +135,7 @@ public class PedidoData {
                 pedido.setFecha((rs.getDate("fecha")).toLocalDate());
                 pedido.setEstado(true);
                 pedido.setImporte(rs.getInt("importe"));
-                
+                pedido.setHora(rs.getTime("hora"));
 
 		listadoPedidos.add(pedido);
 		
@@ -210,6 +210,7 @@ public class PedidoData {
                 pedido.setFecha((rs.getDate("fecha")).toLocalDate());
                 pedido.setEstado(true);
                 pedido.setImporte(rs.getInt("importe"));
+                pedido.setHora(rs.getTime("hora"));
                pedidos.add(pedido);
            }
            ps.close();
@@ -240,6 +241,7 @@ public class PedidoData {
                 pedido.setFecha((rs.getDate("fecha")).toLocalDate());
                 pedido.setEstado(true);
                 pedido.setImporte(rs.getInt("importe"));
+                pedido.setHora(rs.getTime("hora"));
                pedidos.add(pedido);
           }
       }catch (SQLException ex) {
@@ -268,6 +270,7 @@ public class PedidoData {
                 pedido.setFecha((rs.getDate("fecha")).toLocalDate());
                 pedido.setEstado(true);
                 pedido.setImporte(rs.getInt("importe"));
+                pedido.setHora(rs.getTime("hora"));
                pedidos.add(pedido);  
             }
         }catch (SQLException ex) {
@@ -297,6 +300,7 @@ public class PedidoData {
                 pedido.setFecha((rs.getDate("fecha")).toLocalDate());
                 pedido.setEstado(true);
                 pedido.setImporte(rs.getInt("importe"));
+                pedido.setHora(rs.getTime("hora"));
                pedidos.add(pedido);  
          }
          ps.close();
