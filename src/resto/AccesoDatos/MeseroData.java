@@ -19,7 +19,7 @@ public class MeseroData {
     }
     public void guardarMesero (Mesero mesero) {
 	
-	String sql = "INSERT INTO mesero (nombre, user, password) VALUES (?, ?, ?)";
+	String sql = "INSERT INTO mesero (nombre, user, password, estado) VALUES (?, ?, ?, ?)";
 	try {
 		PreparedStatement ps = con.prepareStatement (sql, Statement.RETURN_GENERATED_KEYS);
                 
@@ -28,7 +28,7 @@ public class MeseroData {
 		ps.setString(1, mesero.getNombre());
 		ps.setString(2, mesero.getUser());
 		ps.setString(3, mesero.getPassword());
-		
+		ps.setBoolean(4, mesero.isEstado());
 		
                 //ejecuto el comando sql
 		ps.executeUpdate();
@@ -46,16 +46,17 @@ public class MeseroData {
     
   public void modificarMesero (Mesero mesero) {
 	
-	String sql = "UPDATE mesero SET nombre = ?, user = ?, password = ? WHERE idMesero = ?";
+	String sql = "UPDATE mesero SET nombre = ?, user = ?, password = ?, estado = ? WHERE idMesero = ?";
 
 
 	try {
 
                  PreparedStatement ps = con.prepareStatement(sql);
 		
-		ps.setString(2, mesero.getNombre());
-		ps.setString(3, mesero.getUser());
-		ps.setString(4, mesero.getPassword());
+		ps.setString(1, mesero.getNombre());
+		ps.setString(2, mesero.getUser());
+		ps.setString(3, mesero.getPassword());
+                ps.setBoolean(4, mesero.isEstado());
 		ps.setInt(5, mesero.getIdMesero());
 		int exito = ps.executeUpdate();
 
@@ -90,7 +91,7 @@ String sql = "UPDATE mesero SET estado = 0 WHERE idMesero = ? ";
  public Mesero buscarMesero(int id){
 	Mesero mesero = null;
      
-	String sql = "SELECT nombre , user , password FROM mesero WHERE idMesero = ?";
+	String sql = "SELECT nombre , user , password, estado FROM mesero WHERE idMesero = ?";
 	PreparedStatement ps = null;
 	try {
 		ps = (PreparedStatement) con.prepareStatement(sql);
@@ -106,6 +107,7 @@ String sql = "UPDATE mesero SET estado = 0 WHERE idMesero = ? ";
                 mesero.setNombre(rs.getString("nombre"));
                 mesero.setUser(rs.getString("user"));
                 mesero.setPassword(rs.getString("password"));
+                mesero.setEstado(rs.getBoolean("estado"));
              
              
 		

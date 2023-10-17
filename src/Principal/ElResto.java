@@ -150,11 +150,11 @@ public class ElResto {
 
 /////creo meseros
 ////
-//Mesero mesero = new Mesero("pepe","pepe23","2023");
+//Mesero mesero = new Mesero("pepe","pepe23","2023", true);
 //
-//Mesero mesero2 = new Mesero("pedro","p23","pedro12345");
+//Mesero mesero2 = new Mesero("pedro","p23","pedro12345", true);
 //
-//MeseroData meserod = new MeseroData();
+MeseroData meserod = new MeseroData();
 //// guardo los meseros
 //
 //meserod.guardarMesero(mesero);
@@ -162,25 +162,25 @@ public class ElResto {
 //
 //// elimino mesero
 //
-//meserod.eliminarMesero(2);
+//meserod.eliminarMesero(3);
 //
 //// modifico un mesero
-//
-//Mesero mesero3 = new Mesero(1,"pepe","pepe23","pepe2025");
-//
+////
+//Mesero mesero3 = new Mesero(3,"pepe","pepe23","2023",false);
+////
 //meserod.modificarMesero(mesero3);
 
 //pruebo buscar mesero
 
-//Mesero mesero =new Mesero();
-//mesero=meserod.buscarMesero(1);
-//mesero.toString();
-//
-//    System.out.println("nombre "+mesero.getNombre());
-//    
-//    System.out.println("contra " +mesero.getPassword());
-//    
-//    System.out.println("usuario "+ mesero.getUser());
+Mesero mesero =new Mesero();
+mesero=meserod.buscarMesero(4);
+mesero.toString();
+
+    System.out.println("nombre "+mesero.getNombre());
+    
+    System.out.println("contra " +mesero.getPassword());
+    
+    System.out.println("usuario "+ mesero.getUser());
 
 
 //                  *** PRUEBA ReservaData *****
@@ -272,8 +272,8 @@ public class ElResto {
 
 /////////////******PRUEBA PEDIDODATA*****/////////////7
 
-Pedido pedido=new Pedido();
-pedido.setMesa(1);
+//Pedido pedido=new Pedido();
+//pedido.setMesa(1);
     }
     
 }

@@ -7,21 +7,24 @@ public class Mesero {
     private String nombre;
     private String user;
     private String password;
+    private Boolean estado;
 
     public Mesero() {
     }
 
-    public Mesero(int idMesero, String nombre, String user, String password) {
+    public Mesero(int idMesero, String nombre, String user, String password, Boolean estado) {
         this.idMesero = idMesero;
         this.nombre = nombre;
         this.user = user;
         this.password = password;
+        this.estado = estado;
     }
 
-    public Mesero(String nombre, String user, String password) {
+    public Mesero(String nombre, String user, String password, Boolean estado) {
         this.nombre = nombre;
         this.user = user;
         this.password = password;
+        this. estado = estado;
     }
 
     public int getIdMesero() {
@@ -56,6 +59,16 @@ public class Mesero {
         this.password = password;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+
+
     @Override
     public String toString() {
         return "Mesero{" + "idMesero=" + idMesero + ", nombre=" + nombre + ", user=" + user + ", password=" + password + '}';
@@ -69,5 +82,3 @@ public class Mesero {
     
     
 }
-
-
