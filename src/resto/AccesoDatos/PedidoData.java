@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,56 +27,48 @@ import resto.Entidades.Pedido;
 public class PedidoData {
     
     private Connection con=null;
-    private MesaData md = new MesaData();
-    private MeseroData meserod = new MeseroData();
-    private DetallePedidoData  detalled = new DetallePedidoData();
-    
-    public void PedidoData(){
-        System.out.println("anda?"+con);
-        con= Conexion.getConexion();
-        
+    private MesaData md ;
+    private MeseroData meserod;
+
+    public PedidoData() {
+        con = Conexion.getConexion();
+        md = new MesaData();
+        meserod = new MeseroData();
     }
+  
     
     
-    
- 
+
      public void guardarPedido(Pedido pedido){
          // muestro el pedido antes de que lo guarde
-         System.out.println(""+ pedido.toString());
-         
+         //System.out.println(""+ pedido.toString());
+        
            String sql = "INSERT INTO pedido(idMesa , idMesero , fecha , estado , importe, hora) Values(?,?,?,?,?,?)";
-           System.out.println("1");
+           
       try {
          PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-          
-          System.out.println("2");
-          
+         
+
           ps.setInt(1,pedido.getMesa().getIdMesa());
-          
-          System.out.println("3");
-          
           ps.setInt(2, pedido.getMesero().getIdMesero());
-          
-          System.out.println("4");
-          
           ps.setDate(3, Date.valueOf(pedido.getFecha()));  
           //localDate a Date
-          System.out.println("5");
+          
           ps.setBoolean(4,pedido.isEstado());
           
-          System.out.println("6");
+        
           
           ps.setDouble(5 , pedido.getImporte());
           
-          System.out.println("7");
+          
           
           ps.setTime(6, pedido.getHora());
           
-          System.out.println("8");
+        
           ps.executeUpdate();
-          System.out.println("9");
+          
           ResultSet rs = ps.getGeneratedKeys();
-          System.out.println("10");
+       
           
           if (rs.next()){
 			pedido.setIdPedido(rs.getInt(1));
@@ -116,13 +109,11 @@ public class PedidoData {
           
           ps.setInt(1,pedido.getMesa().getIdMesa());
           ps.setInt(2, pedido.getMesero().getIdMesero());
-          //ps.setInt(3, pedido.getDetallepedido().getIdDtallePedido());
           ps.setDate(3, Date.valueOf(pedido.getFecha()));           //localDate a Date
           ps.setBoolean(4,pedido.isEstado());
           ps.setDouble(5 , pedido.getImporte());
           ps.setTime(6, pedido.getHora());
           ps.setInt(7, pedido.getIdPedido());
-          
            int  exito = ps.executeUpdate();
           
           if (exito == 1) {
@@ -218,7 +209,7 @@ public class PedidoData {
 		return pedido;
 	
 }       
-    public List<Pedido> listarPedidoPorId(int idMesero){
+    public List<Pedido> listarPedidoPorIdMesero(int idMesero){
         List<Pedido> pedidos=new ArrayList<>();
         String sql="SELECT * FROM pedido WHERE idMesero=? AND estado = 1";
        try{
@@ -277,7 +268,7 @@ public class PedidoData {
     
     public List<Pedido> listarPedidosCobradosPorMeseroEnDia(int idMesero, LocalDate fecha ){
         List<Pedido> pedidos=new ArrayList();
-        String sql="SELECT * FROM pedido WHERE idMesero = ? ANDA DATE(fecha)= ? AND estado = 1";
+        String sql="SELECT * FROM pedido WHERE idMesero = ? AND DATE(fecha)= ? AND estado = 1";
         
         try{
             PreparedStatement ps=con.prepareStatement(sql);
@@ -303,7 +294,7 @@ public class PedidoData {
 		}
         return pedidos;
     }
-    
+                                                                       // Time inicio,Time Fin
     public List<Pedido> listarPedidosMesaEntreHoras(int idMesa, LocalDateTime inicio, LocalDateTime fin){
      List<Pedido> pedidos=new ArrayList();
      String sql="SELECT * FROM pedido WHERE idMesa = ? AND fecha BETWEEN ? AND ? ";
@@ -313,6 +304,7 @@ public class PedidoData {
          ps.setInt(1, idMesa);
          ps.setTimestamp(2, Timestamp.valueOf(inicio));
          ps.setTimestamp(3, Timestamp.valueOf(fin));
+         
          ResultSet rs=ps.executeQuery();
          
          while(rs.next()){
