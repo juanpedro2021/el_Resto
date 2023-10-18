@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -33,11 +34,22 @@ public class DetallePedidoData {
        String sql = "INSERT INTO DetallePedido (idPedido, idProducto, Cantidad) VALUES (?, ?, ?)";
       
        try{
-           PreparedStatement ps = con.prepareStatement(sql);
+           PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
            ps.setInt(1, detallePedido.getPedido().getIdPedido());
            ps.setInt(2, detallePedido.getProducto().getidProducto());
            ps.setInt(3, detallePedido.getCantidad());
            ps.executeUpdate();
+           
+           ResultSet rs = ps.getGeneratedKeys();
+
+		if (rs.next()){
+			detallePedido.setIdDtallePedido(rs.getInt(1));
+		JOptionPane.showMessageDialog(null, "detalle añadido con éxito");
+		}else{
+                JOptionPane.showMessageDialog(null, "detalle no existe");
+		    
+                }
+           
            ps.close();
        }catch (SQLException ex) {
 		JOptionPane.showMessageDialog(null, "Error al agregar detalle "+ ex.getMessage());
@@ -50,12 +62,19 @@ public class DetallePedidoData {
         
         try {
            
-            PreparedStatement statement = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
 
-            statement.setInt(1, idDetallePedido);
+            ps.setInt(1, idDetallePedido);
 
-            statement.executeUpdate();
-            statement.close();
+         int exito = ps.executeUpdate();
+
+		if (exito == 1) {
+		
+		JOptionPane.showMessageDialog(null, "Eliminacion Exitosa"); 
+		} else {
+		JOptionPane.showMessageDialog(null, "El detalle  no existe");
+		}
+                ps.close();
         } catch (SQLException ex) {
 		JOptionPane.showMessageDialog(null, "Error al eliminar detalle "+ ex.getMessage());
 		}
@@ -67,15 +86,22 @@ public class DetallePedidoData {
          
          try {
 
-            PreparedStatement statement = con.prepareStatement(sql);
+           PreparedStatement ps = con.prepareStatement(sql);
 
-            statement.setInt(1, detallePedido.getPedido().getIdPedido());
-            statement.setInt(2, detallePedido.getProducto().getidProducto());
-            statement.setInt(3, detallePedido.getCantidad());
-            statement.setInt(4, detallePedido.getIdDtallePedido());
+            ps.setInt(1, detallePedido.getPedido().getIdPedido());
+            ps.setInt(2, detallePedido.getProducto().getidProducto());
+            ps.setInt(3, detallePedido.getCantidad());
+            ps.setInt(4, detallePedido.getIdDtallePedido());
 
-            statement.executeUpdate();
-            statement.close();
+            int exito = ps.executeUpdate();
+
+		if (exito == 1) {
+		
+		JOptionPane.showMessageDialog(null, "Modificado exitosamente"); 
+		} else {
+		JOptionPane.showMessageDialog(null, "El detalle no existe");
+		}
+                
         } catch (SQLException ex) {
 		JOptionPane.showMessageDialog(null, "Error al modificar detalle "+ ex.getMessage());
 		}
@@ -85,7 +111,7 @@ public class DetallePedidoData {
 	DetallePedido detalle = null;
         PedidoData pd=new PedidoData();
      
-	String sql = "SELECT idPedido, idProducto , cantidad FROM mesa WHERE idDetallePedido = ? ";
+	String sql = "SELECT idPedido, idProducto , cantidad FROM detallepedido WHERE idDetallePedido = ? ";
 	PreparedStatement ps = null;
 	try {
 		ps = (PreparedStatement) con.prepareStatement(sql);
@@ -101,11 +127,9 @@ public class DetallePedidoData {
                 detalle.setIdDtallePedido(id);
                 Pedido pedido = pd.buscarPedido(rs.getInt("idPedido"));
                 detalle.setPedido(pedido);
-                
                
                 Producto producto = proD.buscarProducto(rs.getInt("idProducto"));
                 detalle.setProducto(producto);
-                
                 detalle.setCantidad(rs.getInt("cantidad"));           
 		
 		} else {

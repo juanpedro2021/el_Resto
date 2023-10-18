@@ -59,9 +59,7 @@ public class DetallePedido {
     public String toString() {
         return "DetallePedido{" + "idDtallePedido=" + idDtallePedido + ", pedido=" + pedido + ", producto=" + producto + ", cantidad=" + cantidad + '}';
     }
-    
-    
-    
-    
-    
+
+   
+ 
 }
