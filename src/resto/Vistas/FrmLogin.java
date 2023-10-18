@@ -1,41 +1,42 @@
 
 package resto.Vistas;
 
-import packLoginete.Loginetee;
-import packLoginete.LogineteeData;
+import javax.swing.JOptionPane;
+import resto.AccesoDatos.LoguinData;
+import resto.Entidades.Mesero;
 
 
 
 
 
 public class FrmLogin extends javax.swing.JFrame {
-            Loginetee lg= new Loginetee();
-            LogineteeData login= new LogineteeData();
+            Mesero lg= new Mesero();
+            LoguinData login= new LoguinData();
    
     public FrmLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
     
-    public void validar(){
-        String user = jtfUsuario.getText();
-        String pass = String.valueOf(jtfPass.getText());
-        if(!"".equals(user) || !"".equals(pass)){
-//            login lg= new login();
-//            LogineteData login= new LogineteData(); estos 2 renglones los meti en linea 8 y 9
-           // lg = login.log(user, pass);
-            if(lg.getUser() !=null && lg.getPassword() != null){
-                    
-                    
-                //Sistema sis=new Sistema();
-                //sis.setVisible (true);
-                dispose();
-                
-            }
-            
-        }
-        
-    }
+//    public void validar(){
+//        String user = jtfUsuario.getText();
+//        String pass = String.valueOf(jtfPass.getText());
+//        if(!"".equals(user) || !"".equals(pass)){
+////            login lg= new login();
+////            LogineteData login= new LogineteData(); estos 2 renglones los meti en linea 8 y 9
+//           // lg = login.log(user, pass);
+//            if(lg.getUser() !=null && lg.getPassword() != null){
+//                    
+//                    
+//                //Sistema sis=new Sistema();
+//                //sis.setVisible (true);
+//                dispose();
+//                
+//            }
+//            
+//        }
+//        
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -124,9 +125,31 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarActionPerformed
-        // TODO add your handling code here:
+      
         
-        validar();
+        //validar();
+        
+       LoguinData lo = new LoguinData();
+        
+        String user = jtfUsuario.getText();
+        String pass = String.valueOf(jtfPass.getText());
+        
+        
+        boolean correcto=false;
+        correcto= lo.validacionJuan(user,pass);
+        if (correcto==true) {
+            General general = new General();
+            general.setVisible(true);
+            this.dispose();
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Intente nuevamente");
+            jtfUsuario.setText("");
+            jtfPass.setText("");
+        }
+        
+        
+        
     }//GEN-LAST:event_jbIngresarActionPerformed
 
     /**

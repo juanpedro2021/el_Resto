@@ -39,11 +39,8 @@ public class Pedido {
         this.importe = importe;
     }
 
-   
-
- 
-
     public Pedido() {
+        
     }
 
     public int getIdPedido() {

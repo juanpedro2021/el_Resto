@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import resto.Entidades.Mesero;
 
@@ -15,7 +17,9 @@ public class MeseroData {
       private Connection con=null;
 
     public MeseroData() {
+        //System.out.println("uno "+con);
         con= Conexion.getConexion();
+        //System.out.println("dos "+con);
     }
     public void guardarMesero (Mesero mesero) {
 	
@@ -120,7 +124,34 @@ String sql = "UPDATE mesero SET estado = 0 WHERE idMesero = ? ";
 		}
 		return mesero;
 		}         
-        
+ public List <Mesero> listarUsuario() {
+
+	List<Mesero> meseros = new ArrayList<>();
+	String sql = "SELECT * FROM mesero WHERE estado = 1";
+	try{
+
+                PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+
+		Mesero mesero=new Mesero();
+		mesero.setIdMesero(rs.getInt("idMesero"));
+                mesero.setNombre(rs.getString("nombre"));
+                mesero.setUser(rs.getString("user"));
+                mesero.setPassword(rs.getString("password"));
+                mesero.setEstado(rs.getBoolean("estado"));
+		
+                
+		meseros.add(mesero);
+                
+		}
+		ps.close ();
+
+	 	} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero "+ex.getMessage());
+		}
+		return meseros;
+		}        
 	}
 
         
