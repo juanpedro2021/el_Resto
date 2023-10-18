@@ -102,7 +102,7 @@ public class DetallePedidoData {
                 Pedido pedido = pd.buscarPedido(rs.getInt("idPedido"));
                 detalle.setPedido(pedido);
                 
-                // falta esto
+               
                 Producto producto = proD.buscarProducto(rs.getInt("idProducto"));
                 detalle.setProducto(producto);
                 
