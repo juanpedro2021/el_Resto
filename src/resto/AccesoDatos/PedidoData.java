@@ -53,18 +53,9 @@ public class PedidoData {
           ps.setInt(2, pedido.getMesero().getIdMesero());
           ps.setDate(3, Date.valueOf(pedido.getFecha()));  
           //localDate a Date
-          
           ps.setBoolean(4,pedido.isEstado());
-          
-        
-          
           ps.setDouble(5 , pedido.getImporte());
-          
-          
-          
           ps.setTime(6, pedido.getHora());
-          
-        
           ps.executeUpdate();
           
           ResultSet rs = ps.getGeneratedKeys();
@@ -295,18 +286,18 @@ public class PedidoData {
         return pedidos;
     }
                                                                        // Time inicio,Time Fin
-    public List<Pedido> listarPedidosMesaEntreHoras(int idMesa, LocalDateTime inicio, LocalDateTime fin){
-     List<Pedido> pedidos=new ArrayList();
-     String sql="SELECT * FROM pedido WHERE idMesa = ? AND fecha BETWEEN ? AND ? ";
-   
+    public List<Pedido> listarPedidosMesaEntreHoras(int idMesa, Time inicio, Time fin){
+     List<Pedido> listadopedidos=new ArrayList();
+     String sql="SELECT * FROM pedido WHERE idMesa = ? AND hora BETWEEN ? AND ? ";
+     
      try{
          PreparedStatement ps=con.prepareStatement(sql);
          ps.setInt(1, idMesa);
-         ps.setTimestamp(2, Timestamp.valueOf(inicio));
-         ps.setTimestamp(3, Timestamp.valueOf(fin));
-         
+         ps.setTime(2, inicio);
+         ps.setTime(3, fin);
+
          ResultSet rs=ps.executeQuery();
-         
+
          while(rs.next()){
               Pedido pedido=new Pedido();
               pedido.setIdPedido(rs.getInt("idPedido"));
@@ -318,12 +309,15 @@ public class PedidoData {
                 pedido.setEstado(true);
                 pedido.setImporte(rs.getInt("importe"));
                 pedido.setHora(rs.getTime("hora"));
-               pedidos.add(pedido);  
+                
+               listadopedidos.add(pedido);  
+
          }
+
          ps.close();
      }catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido "+ex.getMessage());
 		}
-     return pedidos;
+     return listadopedidos;
     }
 }

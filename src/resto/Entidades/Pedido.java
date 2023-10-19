@@ -10,29 +10,24 @@ public class Pedido {
     private int idPedido;
     private Mesa mesa;
     private Mesero mesero;
-    private Producto producto;
     private LocalDate fecha;
     private Time hora;
     private boolean estado;
     private double importe;
 
-    public Pedido(int idPedido, Mesa mesa, Mesero mesero, Producto producto,LocalDate fecha, Time hora, boolean estado, double importe) {
+    public Pedido(int idPedido, Mesa mesa, Mesero mesero,LocalDate fecha, Time hora, boolean estado, double importe) {
         this.idPedido = idPedido;
         this.mesa = mesa;
         this.mesero = mesero;
-        this.producto = producto;
-        
         this.fecha = fecha;
         this.hora = hora;
         this.estado = estado;
         this.importe = importe;
     }
 
-    public Pedido(Mesa mesa, Mesero mesero, Producto producto, LocalDate fecha, Time hora, boolean estado, double importe) {
+    public Pedido(Mesa mesa, Mesero mesero, LocalDate fecha, Time hora, boolean estado, double importe) {
         this.mesa = mesa;
         this.mesero = mesero;
-        this.producto = producto;
-        
         this.fecha = fecha;
         this.hora = hora;
         this.estado = estado;
@@ -65,14 +60,6 @@ public class Pedido {
 
     public void setMesero(Mesero mesero) {
         this.mesero = mesero;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
     }
 
     public LocalDate getFecha() {
@@ -109,8 +96,10 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", mesa=" + mesa + ", mesero=" + mesero + ", producto=" + producto + ", fecha=" + fecha + ", hora=" + hora + ", estado=" + estado + ", importe=" + importe + '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", mesa=" + mesa + ", mesero=" + mesero + ", fecha=" + fecha + ", hora=" + hora + ", estado=" + estado + ", importe=" + importe + '}';
     }
+
+   
 
 
 }

@@ -17,9 +17,8 @@ public class MeseroData {
       private Connection con=null;
 
     public MeseroData() {
-        //System.out.println("uno "+con);
         con= Conexion.getConexion();
-        //System.out.println("dos "+con);
+
     }
     public void guardarMesero (Mesero mesero) {
 	

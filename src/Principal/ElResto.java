@@ -24,6 +24,8 @@ public class ElResto {
 
  
     public static void main(String[] args) {
+    }
+    }
        //probando conexion
        
 //       Conexion con= new Conexion();
@@ -249,33 +251,38 @@ public class ElResto {
 //    System.out.println("estado "+ reserva3.isEstado());
 //
 
+/////////////***PRUEBA PEDIDODATA**/////////////
 
-/////////////***PRUEBA PEDIDODATA**/////////////7
-MesaData md = new MesaData();
-MeseroData meserod = new MeseroData();
-ProductoData pd = new ProductoData();
-
-
-Pedido pedido=new Pedido();
-
-pedido.setMesa(md.buscarMesa(2));
-pedido.setMesero(meserod.buscarMesero(1));
-
-pedido.setFecha(LocalDate.of(2023, 10, 25));
-pedido.setEstado(true);
-pedido.setImporte(900.50);
- String hora = ("19:01:46"); 
-pedido.setHora(Time.valueOf(hora));
-
-pedido.setProducto(pd.buscarProducto(8));
-
-        //System.out.println("antes ");
-PedidoData pedidod = new PedidoData();
-       // System.out.println("casi");
+//MesaData md = new MesaData();
+//MeseroData meserod = new MeseroData();
+//ProductoData pd = new ProductoData();
+//
+//
+//Pedido pedido=new Pedido();
+//
+//pedido.setMesa(md.buscarMesa(2));
+//pedido.setMesero(meserod.buscarMesero(1));
+//
+//pedido.setFecha(LocalDate.of(2023, 10, 25));
+//pedido.setEstado(true);
+//pedido.setImporte(900.50);
+//String hora = ("19:01:46"); 
+//pedido.setHora(Time.valueOf(hora));
+//
+//pedido.setProducto(pd.buscarProducto(8));
+//
+//        System.out.println("antes ");
+//PedidoData pedidod = new PedidoData();
+//        System.out.println("casi");
 //pedidod.guardarPedido(pedido);
-
-        //System.out.println("agego");
-   }
+//
+//        System.out.println("agego");
+//   }
+//    
+    //Mesero mesero = new Mesero("pedro","p23","pedro12345", true);
+////MeseroData meserod = new MeseroData();
+////// guardo los meseros
+////
     
     ////                  *** PRUEBA DetallePedidoData *****
 
@@ -303,5 +310,5 @@ PedidoData pedidod = new PedidoData();
 //System.out.println("7");
 //detalled.agregarDetallePedido(detalle);
 //System.out.println("8");
-    }
+    
 

@@ -32,6 +32,7 @@ Pedido pedido2 = new Pedido();
 Pedido pedido3 = new Pedido();
 Pedido pedido4 = new Pedido();
 Pedido pedido5 = new Pedido();
+Pedido pedido6 = new Pedido();
 PedidoData pedidod = new PedidoData();
 
 //creo un pedido
@@ -80,6 +81,20 @@ PedidoData pedidod = new PedidoData();
 //pedidod.guardarPedido(pedido2);
 //System.out.println("3");
 //pedidod.guardarPedido(pedido3);
+
+
+//pedido6.setMesa(md.buscarMesa(2));
+//pedido6.setMesero(meserod.buscarMesero(1));
+//
+//pedido6.setFecha(LocalDate.of(2023, 10, 15));
+//pedido6.setEstado(true);
+//pedido6.setImporte(900.50);
+//String hora5 = ("19:01:46"); 
+//pedido6.setHora(Time.valueOf(hora5));
+//
+//pedido6.setProducto(pd.buscarProducto(8));
+//
+//pedidod.guardarPedido(pedido6);
 
 //elimino un pedido EL PEDIDO 9
 
@@ -148,7 +163,7 @@ PedidoData pedidod = new PedidoData();
 
 //List<Pedido> listado = new ArrayList<>();
 //
-//LocalDate fecha =LocalDate.of(2023, 10, 30);
+//LocalDate fecha =LocalDate.of(2023, 10, 15);
 //
 //listado = pedidod.listarPedidosCobradosPorMeseroEnDia(1,fecha);
 //
@@ -158,20 +173,20 @@ PedidoData pedidod = new PedidoData();
 //    }
 
 
-//
-
 //        List<Pedido> listado = new ArrayList<>();
+//        
 //String hora5 = ("18:30:00");
 //Time inicio=Time.valueOf(hora5);
 //
 //String hora6 = ("21:00:00");
-//Time fin=Time.valueOf(hora5);
-//
-//listado = pedidod.listarPedidosMesaEntreHoras(1,inicio,fin);
+//Time fin=Time.valueOf(hora6);
+//int id =2;
+//listado = pedidod.listarPedidosMesaEntreHoras(id,inicio,fin);
 //
 //for(Pedido pe :listado ){
-// 
 //    System.out.println(""+pe.toString());
 //    }
+
+
    }
      }
