@@ -45,6 +45,21 @@ public class General extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
         Preservas = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        Lmesa = new javax.swing.JLabel();
+        Lcliente = new javax.swing.JLabel();
+        LfechaHora = new javax.swing.JLabel();
+        Ldni = new javax.swing.JLabel();
+        txtFechaHora = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
+        txtClienteReserva = new javax.swing.JTextField();
+        btnAgregarRes = new javax.swing.JButton();
+        btnModifRes = new javax.swing.JButton();
+        btnLimpiarRes = new javax.swing.JButton();
+        btnEliminarRes = new javax.swing.JButton();
+        cbMesa = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         Usuario = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -64,6 +79,7 @@ public class General extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 153));
@@ -198,15 +214,124 @@ public class General extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("MESAS", Pmesas);
 
+        Lmesa.setText("Nro Mesa:");
+
+        Lcliente.setText("Cliente:");
+
+        LfechaHora.setText("Fecha y hora:");
+
+        Ldni.setText("DNI:");
+
+        btnAgregarRes.setText("Agregar");
+
+        btnModifRes.setText("Modificar");
+
+        btnLimpiarRes.setText("Limpiar");
+        btnLimpiarRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarResActionPerformed(evt);
+            }
+        });
+
+        btnEliminarRes.setText("Eliminar");
+
+        cbMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Ldni)
+                            .addComponent(Lcliente)
+                            .addComponent(Lmesa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LfechaHora, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFechaHora)
+                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(txtClienteReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                            .addComponent(cbMesa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAgregarRes)
+                            .addComponent(btnEliminarRes))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLimpiarRes)
+                            .addComponent(btnModifRes))
+                        .addGap(39, 39, 39))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lmesa)
+                            .addComponent(cbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LfechaHora)
+                            .addComponent(txtFechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lcliente)
+                            .addComponent(txtClienteReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addComponent(Ldni))
+                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarRes)
+                    .addComponent(btnModifRes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiarRes)
+                    .addComponent(btnEliminarRes))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout PreservasLayout = new javax.swing.GroupLayout(Preservas);
         Preservas.setLayout(PreservasLayout);
         PreservasLayout.setHorizontalGroup(
             PreservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
+            .addGroup(PreservasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         PreservasLayout.setVerticalGroup(
             PreservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGroup(PreservasLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+            .addGroup(PreservasLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("RESERVAS", Preservas);
@@ -373,6 +498,9 @@ public class General extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 700, 390));
 
+        jLabel13.setText("jLabel13");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 120, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -391,6 +519,14 @@ public class General extends javax.swing.JFrame {
         usuario.setText("");
         password.setText("");
     }//GEN-LAST:event_BlimpiarActionPerformed
+
+    private void btnLimpiarResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarResActionPerformed
+        // TODO add your handling code here:
+        txtFechaHora.setText("");
+        txtClienteReserva.setText("");
+        txtDni.setText("");
+        
+    }//GEN-LAST:event_btnLimpiarResActionPerformed
 
     /**
      * @param args the command line arguments
@@ -432,11 +568,20 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JButton Blimpiar;
     private javax.swing.JButton Bmodificar;
     private javax.swing.JButton Bregistrar;
+    private javax.swing.JLabel Lcliente;
+    private javax.swing.JLabel Ldni;
+    private javax.swing.JLabel LfechaHora;
+    private javax.swing.JLabel Lmesa;
     private javax.swing.JPanel Pestock;
     private javax.swing.JPanel Pmesas;
     private javax.swing.JPanel Ppedidos;
     private javax.swing.JPanel Preservas;
     private javax.swing.JPanel Usuario;
+    private javax.swing.JButton btnAgregarRes;
+    private javax.swing.JButton btnEliminarRes;
+    private javax.swing.JButton btnLimpiarRes;
+    private javax.swing.JButton btnModifRes;
+    private javax.swing.JComboBox<String> cbMesa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -449,6 +594,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -459,11 +605,17 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlPass;
     private javax.swing.JTextField nombre;
     private javax.swing.JPasswordField password;
+    private javax.swing.JTextField txtClienteReserva;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtFechaHora;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
 }
