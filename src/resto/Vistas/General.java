@@ -5,6 +5,19 @@
  */
 package resto.Vistas;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import resto.AccesoDatos.MesaData;
+import resto.AccesoDatos.PedidoData;
+import resto.Entidades.Mesa;
+import resto.Entidades.Pedido;
+
 /**
  *
  * @author lau-d
@@ -58,11 +71,7 @@ public class General extends javax.swing.JFrame {
         txtTempNumMesa = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         Pmesas = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
+        PanelMesas = new javax.swing.JPanel();
         Preservas = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Lmesa = new javax.swing.JLabel();
@@ -141,6 +150,11 @@ public class General extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(102, 255, 102));
 
         jButton1.setText("Pedidos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Reserva");
 
@@ -210,7 +224,7 @@ public class General extends javax.swing.JFrame {
         btnAddPlato.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         btnAddPlato.setForeground(new java.awt.Color(255, 255, 255));
         btnAddPlato.setText("+");
-        btnAddPlato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAddPlato.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAddPlato.setFocusable(false);
         btnAddPlato.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnAddPlato.addActionListener(new java.awt.event.ActionListener() {
@@ -240,7 +254,7 @@ public class General extends javax.swing.JFrame {
 
         btnEliminarTempPlato1.setBackground(new java.awt.Color(0, 0, 0));
         btnEliminarTempPlato1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/eliminar.png"))); // NOI18N
-        btnEliminarTempPlato1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarTempPlato1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEliminarTempPlato1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarTempPlato1ActionPerformed(evt);
@@ -290,9 +304,8 @@ public class General extends javax.swing.JFrame {
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtBuscarPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnAddPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAddPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscarPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminarTempPlato1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,7 +347,7 @@ public class General extends javax.swing.JFrame {
 
         jButton9.setText("Agregar Mesero");
         jButton9.setActionCommand(" Agregar nombre mesero");
-        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -410,58 +423,29 @@ public class General extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jPanel24.getAccessibleContext().setAccessibleName("Menú");
-
         jTabbedPane1.addTab("PEDIDOS", Ppedidos);
 
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setText("jLabel3");
-
-        jLabel4.setText("jLabel4");
-
-        jLabel5.setText("jLabel5");
-
-        jButton7.setText("jButton7");
+        PanelMesas.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout PmesasLayout = new javax.swing.GroupLayout(Pmesas);
         Pmesas.setLayout(PmesasLayout);
         PmesasLayout.setHorizontalGroup(
             PmesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PmesasLayout.createSequentialGroup()
-                .addContainerGap(385, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(131, 131, 131)
-                .addComponent(jLabel4)
-                .addGap(266, 266, 266))
-            .addGroup(PmesasLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jButton7)
-                .addGroup(PmesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PmesasLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(PmesasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(215, 215, 215))))
+            .addGap(0, 854, Short.MAX_VALUE)
+            .addGroup(PmesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PmesasLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PanelMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 854, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         PmesasLayout.setVerticalGroup(
             PmesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PmesasLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(PmesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PmesasLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
-                    .addComponent(jButton7))
-                .addGap(45, 45, 45)
-                .addGroup(PmesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addContainerGap(348, Short.MAX_VALUE))
+            .addGap(0, 507, Short.MAX_VALUE)
+            .addGroup(PmesasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PmesasLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PanelMesas, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("MESAS", Pmesas);
@@ -1087,6 +1071,10 @@ public class General extends javax.swing.JFrame {
 //        TotalPagar(tableMenu, totalMenu);
     }//GEN-LAST:event_btnEliminarTempPlato1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     pruebaPanel();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1131,6 +1119,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JLabel Ldni;
     private javax.swing.JLabel LfechaHora;
     private javax.swing.JLabel Lmesa;
+    private javax.swing.JPanel PanelMesas;
     private javax.swing.JPanel Pestock;
     private javax.swing.JPanel Pmesas;
     private javax.swing.JPanel Ppedidos;
@@ -1154,7 +1143,6 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -1167,10 +1155,6 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1220,4 +1204,103 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JTextField txtidMesa;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
+
+
+public void pruebaPanel(){
+        PanelMesas.removeAll();// dejo vacio el panel con el grid
+        PanelMesas.setLayout(new GridLayout(4, 4));
+
+        PedidoData pedidod = new PedidoData();
+
+        Pedido pedido = new Pedido();
+        pedido = pedidod.buscarPedido(9);// le cargo algo por las dudas
+
+        MesaData mesad = new MesaData();
+        Mesa mesa = new Mesa();
+
+        /// listo todas las mesas
+        List<Mesa> listado = new ArrayList<>();
+
+        int cantidad = 0;
+        int numero = 1;
+        int ver = 0;
+        int contador = 0;// posicion en el listado
+
+        // hacer un metodo para ver todas las mesas
+        listado = mesad.listarMesas();
+        System.out.println("" + listado.toString());
+        
+        cantidad = listado.size();// veo el tamaño del vector
+
+        // aca recorro por la cantidad de mesas que hay
+       for (int i = 0; i < cantidad; i++) {
+            mesa = listado.get(contador);      //agarro lo que este en el esapcio contador en el vector
+
+            numero = mesa.getNumMesa();
+            System.out.println("numero mesa"+numero);
+            JButton boton = new JButton("MESA N°: " + numero, new ImageIcon(getClass().getResource("/img/login33.jpg")));
+            boton.setHorizontalTextPosition(JButton.CENTER);
+            boton.setVerticalTextPosition(JButton.BOTTOM);
+
+            // hacer un  metodo que con el id de  la mesa te diga el estado del pedido asociado a esa mesa
+            int id = mesa.getIdMesa();
+
+            pedido = pedidod.buscarPedidoPorMesa(id);
+            if (pedido != null) {
+
+                boolean estadop = false;
+                estadop = pedido.isEstado();// pido el estado del pedido
+                if (estadop == true) {
+                    ver = 1;
+                } else {
+                    ver = 0;
+                }
+                 if (ver == 0) {
+                   // boton.setBackground(new Color(255, 51, 51));// forma de poner el color
+                    boton.setBackground(Color.GREEN);
+                } else {
+                    boton.setBackground(Color.RED);
+                }
+                boton.setForeground(Color.BLACK);
+                boton.setFocusable(false);
+                boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                PanelMesas.add(boton);
+                 boton.addActionListener((ActionEvent e) -> {
+                PanelMesas.removeAll();
+                jTabbedPane1.setSelectedIndex(0);
+                });
+                contador ++;
+                
+            } else {
+                ver = 0;
+                if (ver == 0) {
+                   // boton.setBackground(new Color(255, 51, 51));
+                    boton.setBackground(Color.GREEN);
+                } else {
+                    boton.setBackground(Color.RED);
+                }
+                boton.setForeground(Color.BLACK);
+                boton.setFocusable(false);
+                
+                boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                PanelMesas.add(boton);
+                 boton.addActionListener((ActionEvent e) -> {
+                PanelMesas.removeAll();
+                jTabbedPane1.setSelectedIndex(0);
+                 });
+                contador ++;
+
+            }
+            int n=1;
+            System.out.println("vuelta numero "+contador);
+            n++;
+            if (n==3) {
+               n = n-1;
+           }
+            
+        }//llave del for
+        jTabbedPane1.setSelectedIndex(1);
+    }
+
+
 }
