@@ -146,7 +146,6 @@ public class General extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel21 = new javax.swing.JLabel();
         jtTotalHistorial = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
@@ -363,6 +362,7 @@ public class General extends javax.swing.JFrame {
         totalMenu.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         totalMenu.setText("00.00");
 
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         jButton9.setText("Agregar Mesero");
         jButton9.setActionCommand(" Agregar nombre mesero");
         jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -476,10 +476,13 @@ public class General extends javax.swing.JFrame {
 
         Ldni.setText("DNI:");
 
+        btnAgregarRes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         btnAgregarRes.setText("Agregar");
 
+        btnModifRes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/modificar3e.png"))); // NOI18N
         btnModifRes.setText("Modificar");
 
+        btnLimpiarRes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/escoba2e.png"))); // NOI18N
         btnLimpiarRes.setText("Limpiar");
         btnLimpiarRes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -487,6 +490,7 @@ public class General extends javax.swing.JFrame {
             }
         });
 
+        btnEliminarRes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/eliminar.png"))); // NOI18N
         btnEliminarRes.setText("Eliminar");
 
         cbMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -574,12 +578,12 @@ public class General extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         PreservasLayout.setVerticalGroup(
             PreservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PreservasLayout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
+                .addContainerGap(152, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
             .addGroup(PreservasLayout.createSequentialGroup()
@@ -601,6 +605,7 @@ public class General extends javax.swing.JFrame {
         jlPass.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jlPass.setText("Contraseña");
 
+        Bregistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         Bregistrar.setText("Registrar");
         Bregistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -608,10 +613,13 @@ public class General extends javax.swing.JFrame {
             }
         });
 
+        Bmodificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/modificar3e.png"))); // NOI18N
         Bmodificar.setText("Modificar");
 
+        Beliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/eliminar.png"))); // NOI18N
         Beliminar.setText("Eliminar");
 
+        Blimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/escoba2e.png"))); // NOI18N
         Blimpiar.setText("Limpiar");
         Blimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -639,10 +647,10 @@ public class General extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Bregistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Beliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Bmodificar, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Blimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(Bmodificar)
+                                    .addComponent(Blimpiar)))
                             .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombre, javax.swing.GroupLayout.Alignment.LEADING))
                         .addContainerGap())))
@@ -670,7 +678,7 @@ public class General extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Beliminar)
                     .addComponent(Blimpiar))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout UsuarioLayout = new javax.swing.GroupLayout(Usuario);
@@ -679,8 +687,8 @@ public class General extends javax.swing.JFrame {
             UsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(UsuarioLayout.createSequentialGroup()
                 .addGap(73, 73, 73)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(575, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(537, Short.MAX_VALUE))
         );
         UsuarioLayout.setVerticalGroup(
             UsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -695,12 +703,16 @@ public class General extends javax.swing.JFrame {
 
         jLabel9.setText("Precio:");
 
+        jbGuardarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         jbGuardarProd.setText("Guardar");
 
+        jbModificarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/modificar3e.png"))); // NOI18N
         jbModificarProd.setText("Modificar");
 
+        jbEliminarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/eliminar.png"))); // NOI18N
         jbEliminarProd.setText("Eliminar");
 
+        jbLimpiarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/escoba2e.png"))); // NOI18N
         jbLimpiarProd.setText("Limpiar");
         jbLimpiarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -726,7 +738,7 @@ public class General extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 24, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jtNombreProd)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -737,17 +749,13 @@ public class General extends javax.swing.JFrame {
                             .addComponent(jtPrecioProd)
                             .addComponent(jtStock)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jbGuardarProd)
-                                .addGap(33, 33, 33))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jbEliminarProd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbLimpiarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbModificarProd))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbGuardarProd)
+                            .addComponent(jbEliminarProd))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbModificarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbLimpiarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(13, 13, 13)))
                 .addContainerGap())
         );
@@ -797,7 +805,7 @@ public class General extends javax.swing.JFrame {
         PestockLayout.setHorizontalGroup(
             PestockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PestockLayout.createSequentialGroup()
-                .addContainerGap(128, Short.MAX_VALUE)
+                .addContainerGap(91, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -817,12 +825,16 @@ public class General extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("ALMACEN", Pestock);
 
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         btnAgregar.setText("AGREGAR");
 
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/eliminar.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
 
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/modificar3e.png"))); // NOI18N
         btnEditar.setText("EDITAR");
 
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/escoba2e.png"))); // NOI18N
         btnLimpiar.setText("LIMPIAR");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -862,7 +874,7 @@ public class General extends javax.swing.JFrame {
                                     .addComponent(btnAgregar))
                                 .addGap(56, 56, 56)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel6Layout.createSequentialGroup()
@@ -940,7 +952,7 @@ public class General extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -988,6 +1000,7 @@ public class General extends javax.swing.JFrame {
 
         jLabel20.setText("Hora fin(HH:mm:ss)");
 
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         jButton10.setText("Cargar");
 
         jButton11.setText("Calcular totales");
@@ -997,7 +1010,8 @@ public class General extends javax.swing.JFrame {
             }
         });
 
-        jButton12.setText("Limpíar");
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/escoba2e.png"))); // NOI18N
+        jButton12.setText("Limpiar");
 
         jLabel21.setText("Ingrese fecha:");
 
@@ -1042,10 +1056,8 @@ public class General extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton10)
                                 .addGap(177, 177, 177)))
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49))))
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5))
@@ -1061,7 +1073,6 @@ public class General extends javax.swing.JFrame {
                         .addComponent(jLabel23)
                         .addComponent(jtIdMeseroHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel21))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel24)
@@ -1080,7 +1091,7 @@ public class General extends javax.swing.JFrame {
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton10)
                         .addComponent(jButton12)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtTotalHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel35))
@@ -1309,7 +1320,6 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JFormattedTextField jFormattedTextField4;
     private javax.swing.JLabel jLabel1;
