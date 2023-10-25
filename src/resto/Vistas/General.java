@@ -43,16 +43,20 @@ public class General extends javax.swing.JFrame {
         btnAddPlato = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
         tableMenu = new javax.swing.JTable();
+        btnEliminarTempPlato1 = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tblTemPlatos = new javax.swing.JTable();
         jScrollPane12 = new javax.swing.JScrollPane();
         tableMenu1 = new javax.swing.JTable();
         btnGenerarPedido = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         totalMenu = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        btnEliminarTempPlato = new javax.swing.JButton();
         jScrollPane13 = new javax.swing.JScrollPane();
         txtComentario = new javax.swing.JTextPane();
         jLabel17 = new javax.swing.JLabel();
+        txtTempNumMesa = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
         Pmesas = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -194,7 +198,7 @@ public class General extends javax.swing.JFrame {
 
         Ppedidos.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.darkGray));
 
-        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Platos del Dia"));
+        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Menú"));
 
         txtBuscarPlato.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -234,30 +238,65 @@ public class General extends javax.swing.JFrame {
         tableMenu.setRowHeight(23);
         jScrollPane11.setViewportView(tableMenu);
 
+        btnEliminarTempPlato1.setBackground(new java.awt.Color(0, 0, 0));
+        btnEliminarTempPlato1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/eliminar.png"))); // NOI18N
+        btnEliminarTempPlato1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarTempPlato1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTempPlato1ActionPerformed(evt);
+            }
+        });
+
+        tblTemPlatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "Precio", "Stock"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTemPlatos.setRowHeight(23);
+        jScrollPane10.setViewportView(tblTemPlatos);
+
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(txtBuscarPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddPlato))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel24Layout.createSequentialGroup()
+                            .addComponent(txtBuscarPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnAddPlato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEliminarTempPlato1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtBuscarPlato, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(btnAddPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(233, 233, 233))
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBuscarPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAddPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminarTempPlato1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         tableMenu1.setModel(new javax.swing.table.DefaultTableModel(
@@ -302,16 +341,14 @@ public class General extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarTempPlato.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarTempPlato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarTempPlatoActionPerformed(evt);
-            }
-        });
-
+        txtComentario.setPreferredSize(new java.awt.Dimension(62, 32));
         jScrollPane13.setViewportView(txtComentario);
 
         jLabel17.setText("Nombre del Mesero:");
+
+        txtTempNumMesa.setPreferredSize(new java.awt.Dimension(68, 32));
+
+        jLabel18.setText("Número del Mesa:");
 
         javax.swing.GroupLayout PpedidosLayout = new javax.swing.GroupLayout(Ppedidos);
         Ppedidos.setLayout(PpedidosLayout);
@@ -322,20 +359,22 @@ public class General extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PpedidosLayout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(PpedidosLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PpedidosLayout.createSequentialGroup()
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                    .addGroup(PpedidosLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTempNumMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PpedidosLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel16))
-                    .addGroup(PpedidosLayout.createSequentialGroup()
-                        .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGenerarPedido)
@@ -345,29 +384,33 @@ public class General extends javax.swing.JFrame {
         PpedidosLayout.setVerticalGroup(
             PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PpedidosLayout.createSequentialGroup()
+                .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PpedidosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(PpedidosLayout.createSequentialGroup()
-                        .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PpedidosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                            .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(totalMenu)
-                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17)))
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16)
+                        .addComponent(totalMenu)
+                        .addComponent(jLabel17)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PpedidosLayout.createSequentialGroup()
-                        .addComponent(btnEliminarTempPlato, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PpedidosLayout.createSequentialGroup()
+                    .addGroup(PpedidosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGenerarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))))
+                        .addGap(32, 32, 32))
+                    .addGroup(PpedidosLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(txtTempNumMesa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
+
+        jPanel24.getAccessibleContext().setAccessibleName("Menú");
 
         jTabbedPane1.addTab("PEDIDOS", Ppedidos);
 
@@ -965,84 +1008,84 @@ public class General extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNroMesaActionPerformed
 
     private void txtBuscarPlatoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarPlatoKeyReleased
-        LimpiarTable();
-        ListarPlatos(tblTemPlatos);
+//        LimpiarTable();
+//        ListarPlatos(tblTemPlatos);
     }//GEN-LAST:event_txtBuscarPlatoKeyReleased
 
     private void btnAddPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlatoActionPerformed
-        if (tblTemPlatos.getSelectedRow() >= 0) {
-            int id = Integer.parseInt(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 0).toString());
-            String descripcion = tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 1).toString();
-            double precio = Double.parseDouble(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 2).toString());
-            double total = 1 * precio;
-            item = item + 1;
-            tmp = (DefaultTableModel) tableMenu.getModel();
-            for (int i = 0; i < tableMenu.getRowCount(); i++) {
-                if (tableMenu.getValueAt(i, 0).equals(id)) {
-                    int cantActual = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
-                    int nuevoCantidad = cantActual + 1;
-                    double nuevoSub = precio * nuevoCantidad;
-                    tmp.setValueAt(nuevoCantidad, i, 2);
-                    tmp.setValueAt(nuevoSub, i, 4);
-                    TotalPagar(tableMenu, totalMenu);
-                    return;
-                }
-            }
-            ArrayList lista = new ArrayList();
-            lista.add(item);
-            lista.add(id);
-            lista.add(descripcion);
-            lista.add(1);
-            lista.add(precio);
-            lista.add(total);
-            Object[] O = new Object[6];
-            O[0] = lista.get(1);
-            O[1] = lista.get(2);
-            O[2] = lista.get(3);
-            O[3] = lista.get(4);
-            O[4] = lista.get(5);
-            O[5] = "";
-            tmp.addRow(O);
-            tableMenu.setModel(tmp);
-            TotalPagar(tableMenu, totalMenu);
-        } else {
-            JOptionPane.showMessageDialog(null, "SELECCIONA UNA FILA");
-        }
+//        if (tblTemPlatos.getSelectedRow() >= 0) {
+//            int id = Integer.parseInt(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 0).toString());
+//            String descripcion = tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 1).toString();
+//            double precio = Double.parseDouble(tblTemPlatos.getValueAt(tblTemPlatos.getSelectedRow(), 2).toString());
+//            double total = 1 * precio;
+//            item = item + 1;
+//            tmp = (DefaultTableModel) tableMenu.getModel();
+//            for (int i = 0; i < tableMenu.getRowCount(); i++) {
+//                if (tableMenu.getValueAt(i, 0).equals(id)) {
+//                    int cantActual = Integer.parseInt(tableMenu.getValueAt(i, 2).toString());
+//                    int nuevoCantidad = cantActual + 1;
+//                    double nuevoSub = precio * nuevoCantidad;
+//                    tmp.setValueAt(nuevoCantidad, i, 2);
+//                    tmp.setValueAt(nuevoSub, i, 4);
+//                    TotalPagar(tableMenu, totalMenu);
+//                    return;
+//                }
+//            }
+//            ArrayList lista = new ArrayList();
+//            lista.add(item);
+//            lista.add(id);
+//            lista.add(descripcion);
+//            lista.add(1);
+//            lista.add(precio);
+//            lista.add(total);
+//            Object[] O = new Object[6];
+//            O[0] = lista.get(1);
+//            O[1] = lista.get(2);
+//            O[2] = lista.get(3);
+//            O[3] = lista.get(4);
+//            O[4] = lista.get(5);
+//            O[5] = "";
+//            tmp.addRow(O);
+//            tableMenu.setModel(tmp);
+//            TotalPagar(tableMenu, totalMenu);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "SELECCIONA UNA FILA");
+//        }
     }//GEN-LAST:event_btnAddPlatoActionPerformed
 
     private void btnGenerarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPedidoActionPerformed
-        if (tableMenu.getRowCount() > 0) {
-            RegistrarPedido();
-            detallePedido();
-            LimpiarTableMenu();
-            JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO");
-            jTabbedPane1.setSelectedIndex(0);
-        } else {
-            JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO EN LA PEDIDO");
-        }
+//        if (tableMenu.getRowCount() > 0) {
+//            RegistrarPedido();
+//            detallePedido();
+//            LimpiarTableMenu();
+//            JOptionPane.showMessageDialog(null, "PEDIDO REGISTRADO");
+//            jTabbedPane1.setSelectedIndex(0);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "NO HAY PRODUCTO EN LA PEDIDO");
+//        }
     }//GEN-LAST:event_btnGenerarPedidoActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        if (txtComentario.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA");
-        } else {
-            int id = Integer.parseInt(tableMenu.getValueAt(tableMenu.getSelectedRow(), 0).toString());
-            for (int i = 0; i < tableMenu.getRowCount(); i++) {
-                if (tableMenu.getValueAt(i, 0).equals(id)) {
-                    tmp.setValueAt(txtComentario.getText(), i, 5);
-                    txtComentario.setText("");
-                    tableMenu.clearSelection();
-                    return;
-                }
-            }
-        }
+//        if (txtComentario.getText().equals("")) {
+//            JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA");
+//        } else {
+//            int id = Integer.parseInt(tableMenu.getValueAt(tableMenu.getSelectedRow(), 0).toString());
+//            for (int i = 0; i < tableMenu.getRowCount(); i++) {
+//                if (tableMenu.getValueAt(i, 0).equals(id)) {
+//                    tmp.setValueAt(txtComentario.getText(), i, 5);
+//                    txtComentario.setText("");
+//                    tableMenu.clearSelection();
+//                    return;
+//                }
+//            }
+//        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void btnEliminarTempPlatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTempPlatoActionPerformed
-        modelo = (DefaultTableModel) tableMenu.getModel();
-        modelo.removeRow(tableMenu.getSelectedRow());
-        TotalPagar(tableMenu, totalMenu);
-    }//GEN-LAST:event_btnEliminarTempPlatoActionPerformed
+    private void btnEliminarTempPlato1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTempPlato1ActionPerformed
+//        modelo = (DefaultTableModel) tableMenu.getModel();
+//        modelo.removeRow(tableMenu.getSelectedRow());
+//        TotalPagar(tableMenu, totalMenu);
+    }//GEN-LAST:event_btnEliminarTempPlato1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1099,7 +1142,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarRes;
-    private javax.swing.JButton btnEliminarTempPlato;
+    private javax.swing.JButton btnEliminarTempPlato1;
     private javax.swing.JButton btnGenerarPedido;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnLimpiarRes;
@@ -1123,6 +1166,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1141,6 +1185,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
@@ -1162,6 +1207,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JTable tableMenu;
     private javax.swing.JTable tableMenu1;
     private javax.swing.JTable tblDistriMesas;
+    private javax.swing.JTable tblTemPlatos;
     private javax.swing.JLabel totalMenu;
     private javax.swing.JTextField txtBuscarPlato;
     private javax.swing.JTextField txtCapa;
@@ -1170,6 +1216,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtFechaHora;
     private javax.swing.JTextField txtNroMesa;
+    private javax.swing.JTextField txtTempNumMesa;
     private javax.swing.JTextField txtidMesa;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
