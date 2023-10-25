@@ -320,4 +320,51 @@ public class PedidoData {
 		}
      return listadopedidos;
     }
+    
+     public Pedido buscarPedidoPorMesa(int idMesa){
+	Pedido pedido = null;
+
+	String sql = "SELECT idPedido , idMesa , idMesero , fecha , estado , importe, hora FROM pedido WHERE idMesa = ? AND estado = 1";
+
+	
+	try {
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, idMesa);
+
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {
+		pedido=new Pedido();//acá uso el constructor vacío de pedido
+                //agrego el id
+		pedido.setIdPedido(rs.getInt("idPedido"));
+                
+              // busco la mesa y el mesero con sus id y la agrego
+                Mesa m = md.buscarMesa(idMesa);
+                Mesero mesero = meserod.buscarMesero(rs.getInt("idMesero"));
+                pedido.setMesa(m);
+                pedido.setMesero(mesero);
+                
+              // busco la fecha y la agrego
+                pedido.setFecha((rs.getDate("fecha")).toLocalDate());
+                
+              // agego el estado en true
+                pedido.setEstado(true);
+                
+              // busco el importe y lo agrego
+                pedido.setImporte(rs.getInt("importe"));
+                
+              // busco la hora y la agrego
+                pedido.setHora(rs.getTime("hora"));
+		
+		} else {
+			JOptionPane.showMessageDialog(null, "No existe el pedido");
+		}
+		ps.close();
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido "+ex.getMessage());
+		}
+		return pedido;
+	
+}  
+     
 }

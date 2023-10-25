@@ -44,8 +44,8 @@ public class MesaData {
 		}
         }
 		
-        public void eliminarMesa(int id) {
-String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ? ";
+public void eliminarMesa(int id) {
+        String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ? ";
 	try {
 		
 		PreparedStatement ps = con.prepareStatement (sql);
@@ -62,7 +62,7 @@ String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ? ";
 	}
         
    
-  public void modificarMesa (Mesa mesa) {
+public void modificarMesa (Mesa mesa) {
 	
 	String sql = "UPDATE mesa SET numMesa = ?, capacidad = ?, estado = ? WHERE idMesa = ?";
 
@@ -121,7 +121,7 @@ String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ? ";
 		} 
   
 
- 	public List <Mesa> listarMesasReservadas() {
+public List <Mesa> listarMesasReservadas() {
 
 	List<Mesa> mesas = new ArrayList<>();
 	String sql = "SELECT * FROM mesa WHERE estado = 1";
@@ -180,7 +180,33 @@ String sql = "UPDATE mesa SET estado = 0 WHERE idMesa = ? ";
 		}
 		return mesas;
 		}
-        
-        }
+public List <Mesa> listarMesas() {
 
+	List<Mesa> mesas = new ArrayList<>();
+	String sql = "SELECT * FROM mesa WHERE estado  IN (0,1,2)";
+	try{
+
+                PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+
+		Mesa mesa=new Mesa();
+
+		mesa.setIdMesa(rs.getInt("idMesa"));
+		mesa.setNumMesa(rs.getInt("numMesa"));
+		mesa.setCapacidad(rs.getInt("capacidad"));
+		mesa.setEstado(rs.getInt("estado"));
+		
+                
+		mesas.add(mesa);
+                
+		}
+		ps.close ();
+
+	 	} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa "+ex.getMessage());
+		}
+		return mesas;
+		}
+        }
 
