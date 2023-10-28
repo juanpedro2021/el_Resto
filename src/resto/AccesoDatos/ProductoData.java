@@ -35,8 +35,28 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
 		JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto "+ ex.getMessage());
 		}
 	}
-    
-     public List<Producto> listarProductos() {
+  
+    public List<Producto> listarProductos() {
+       List <Producto> productos=new ArrayList<>();
+       String sql = "SELECT * from producto ";
+       try{
+           PreparedStatement ps= con.prepareStatement(sql);
+           ResultSet rs=ps.executeQuery();
+           
+           while(rs.next()){
+               int id= rs.getInt("idProducto");
+               boolean estado= rs.getBoolean("estado");
+               String nombre= rs.getString("nombre");
+               int cantidad= rs.getInt("stock");
+               double precio = rs.getDouble("precio");
+               productos.add(new Producto(id,estado,nombre,cantidad,precio));
+           }
+       }catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al acceder a la tabla Productos"); 
+     }
+     return productos;
+    }
+     public List<Producto> listarProductosActivos() {
        List <Producto> productos=new ArrayList<>();
        String sql = "SELECT * from producto WHERE estado = 1";
        try{
@@ -141,4 +161,26 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
      }
         return producto;
     }
+    
+    public List<Producto> buscarProductoActivoPrueba(String buscar) {
+       List <Producto> productos=new ArrayList<>();
+       String sql = "SELECT * from producto WHERE estado=1 AND nombre LIKE '%" + buscar + "%'";
+       try{
+           PreparedStatement ps= con.prepareStatement(sql);
+           ResultSet rs=ps.executeQuery();
+           
+           while(rs.next()){
+               int id= rs.getInt("idProducto");
+               boolean estado= rs.getBoolean("estado");
+               String nombre= rs.getString("nombre");
+               int cantidad= rs.getInt("stock");
+               double precio = rs.getDouble("precio");
+               productos.add(new Producto(id,estado,nombre,cantidad,precio));
+           }
+       }catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al acceder a la tabla Productos"); 
+     }
+     return productos;
+    }
+    
 }

@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import resto.Entidades.Reserva;
 
@@ -163,5 +165,27 @@ String sql = "UPDATE reserva SET estado = 0 WHERE idReserva = ? ";
                 
     
 }
+        
+        public List<Reserva> listarReserva() {
+       List <Reserva> productos=new ArrayList<>();
+       String sql = "SELECT * from reserva ";
+       try{
+           PreparedStatement ps= con.prepareStatement(sql);
+           ResultSet rs=ps.executeQuery();
+           
+           while(rs.next()){
+               int id= rs.getInt("idReserva");
+               int idMesa = rs.getInt("idMesa");
+               String nombre= rs.getString("nombre");
+               int DNI = rs.getInt("DNI");
+               Timestamp fecha = (rs.getTimestamp("Fecha"));
+               boolean estado= rs.getBoolean("estado");
+               productos.add(new Reserva(id,idMesa,nombre,DNI,fecha, estado));
+           }
+       }catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "error al acceder a la tabla Reserva"); 
+     }
+     return productos;
+    }       
         
 }
