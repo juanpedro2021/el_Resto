@@ -5,10 +5,16 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import resto.AccesoDatos.MesaData;
 import resto.AccesoDatos.PedidoData;
 import resto.Entidades.Mesa;
@@ -18,11 +24,11 @@ import resto.Entidades.Reserva;
 
 public class General extends javax.swing.JFrame {
 
-    /**
-     * Creates new form General
-     */
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
     public General() {
         initComponents();
+        armarCabeceraHistorial();
+        cargarDatosHistorial();
     }
 
     /**
@@ -128,23 +134,28 @@ public class General extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDistriMesas = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTableHistorial = new javax.swing.JTable();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
         jtIdMesaHistorial = new javax.swing.JTextField();
         jtIdMeseroHistorial = new javax.swing.JTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
-        jtTotalHistorial = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
+        jfHoraInicio = new javax.swing.JFormattedTextField();
+        jtIHorafin = new javax.swing.JFormattedTextField();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jBCargarPMesa = new javax.swing.JButton();
+        jBCalcularSubtotal = new javax.swing.JButton();
+        jbLimpiarHistorial = new javax.swing.JButton();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jbCargarPMesero = new javax.swing.JButton();
+        jBVolverPedidos = new javax.swing.JButton();
+        jbCargarMesaHoras = new javax.swing.JButton();
+        jlTotalHistorial = new javax.swing.JLabel();
+        jbMeseroFecha = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 153));
@@ -185,6 +196,11 @@ public class General extends javax.swing.JFrame {
         jButton6.setText("Cerrar Sesion");
 
         jButton8.setText("HISTORIAL PEDIDOS");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1019,7 +1035,7 @@ public class General extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("DISTRI MESAS", jPanel5);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -1030,11 +1046,11 @@ public class General extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable2);
+        jScrollPane9.setViewportView(jTableHistorial);
 
-        jLabel23.setText("Id Mesero:");
+        jLabel41.setText("Id Mesero:");
 
-        jLabel24.setText("id Mesa:");
+        jLabel42.setText("id Mesa:");
 
         jtIdMeseroHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1042,115 +1058,170 @@ public class General extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        jfHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
 
-        jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
+        jtIHorafin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance())));
 
-        jLabel19.setText("Hora inicio(HH:mm:ss)");
+        jLabel43.setText("Hora inicio(HH:mm:ss)");
 
-        jLabel20.setText("Hora fin(HH:mm:ss)");
+        jLabel44.setText("Hora fin(HH:mm:ss)");
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
-        jButton10.setText("Cargar");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        jBCargarPMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jBCargarPMesaActionPerformed(evt);
             }
         });
 
-        jButton11.setText("Calcular totales");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        jBCalcularSubtotal.setText("Calcular totales");
+        jBCalcularSubtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jBCalcularSubtotalActionPerformed(evt);
             }
         });
 
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/escoba2e.png"))); // NOI18N
-        jButton12.setText("Limpiar");
+        jbLimpiarHistorial.setText("Limpiar");
+        jbLimpiarHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarHistorialActionPerformed(evt);
+            }
+        });
 
-        jLabel21.setText("Ingrese fecha:");
+        jLabel45.setText("Ingrese fecha:");
 
-        jLabel35.setText("Total:");
+        jLabel46.setText("Total:");
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtIdMeseroHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton12))
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel35)
+        jbCargarPMesero.setText("PedidosM");
+        jbCargarPMesero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCargarPMeseroActionPerformed(evt);
+            }
+        });
+
+        jBVolverPedidos.setText("Actualizar");
+        jBVolverPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVolverPedidosActionPerformed(evt);
+            }
+        });
+
+        jbCargarMesaHoras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCargarMesaHorasActionPerformed(evt);
+            }
+        });
+
+        jlTotalHistorial.setText("00.00");
+
+        jbMeseroFecha.setText("PedidosF");
+        jbMeseroFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMeseroFechaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbCargarPMesero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbMeseroFecha)
+                    .addComponent(jtIdMeseroHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addGap(111, 111, 111)
+                                .addComponent(jLabel42))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel44)
+                                    .addComponent(jLabel43))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtTotalHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtIHorafin)
+                            .addComponent(jfHoraInicio)
+                            .addComponent(jtIdMesaHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbLimpiarHistorial))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBCargarPMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbCargarMesaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBCalcularSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jFormattedTextField4)
-                                    .addComponent(jFormattedTextField3)
-                                    .addComponent(jtIdMesaHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton10)
-                                .addGap(177, 177, 177)))
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))))
-            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jBVolverPedidos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel46)
+                        .addGap(24, 24, 24)
+                        .addComponent(jlTotalHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35))
+            .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5))
+                .addComponent(jScrollPane9))
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23)
-                        .addComponent(jtIdMeseroHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel21))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel24)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(jBCalcularSubtotal))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel45)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jBCargarPMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbCargarMesaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel42)
                             .addComponent(jtIdMesaHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jfHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel43))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel20))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton11)
-                    .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton10)
-                        .addComponent(jButton12)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtTotalHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel35))
-                .addGap(13, 13, 13))
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtIHorafin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel44)))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel41)
+                            .addComponent(jtIdMeseroHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbCargarPMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbMeseroFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel46)
+                            .addComponent(jlTotalHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBVolverPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addComponent(jbLimpiarHistorial)
+                        .addContainerGap(33, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -1158,14 +1229,15 @@ public class General extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1294,14 +1366,6 @@ public class General extends javax.swing.JFrame {
      pruebaPanel();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jtIdMeseroHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdMeseroHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtIdMeseroHistorialActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-
-    }//GEN-LAST:event_jButton11ActionPerformed
-
     private void cbMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMesaActionPerformed
         // TODO add your handling code here:
         Reserva reservaSeleccionada=(Reserva)cbMesa.getSelectedItem();
@@ -1314,10 +1378,6 @@ public class General extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jbGuardarProdActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoActionPerformed
         // TODO add your handling code here:
@@ -1398,6 +1458,52 @@ public class General extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void jtIdMeseroHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdMeseroHistorialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtIdMeseroHistorialActionPerformed
+
+    private void jBCargarPMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPMesaActionPerformed
+        cargarDatosHMesa();
+    }//GEN-LAST:event_jBCargarPMesaActionPerformed
+
+    private void jBCalcularSubtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCalcularSubtotalActionPerformed
+        cargarDatosFechaHistorial();
+    }//GEN-LAST:event_jBCalcularSubtotalActionPerformed
+
+    private void jbLimpiarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarHistorialActionPerformed
+        jtIdMeseroHistorial.setText("");
+        jtIdMesaHistorial.setText("");
+        jfHoraInicio.setText("");
+        jtIHorafin.setText("");
+        jDateChooser1.setDate(null);
+        jlTotalHistorial.setText("");
+    }//GEN-LAST:event_jbLimpiarHistorialActionPerformed
+
+    private void jbCargarPMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarPMeseroActionPerformed
+        cargarDatosHMesero();
+    }//GEN-LAST:event_jbCargarPMeseroActionPerformed
+
+    private void jBVolverPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverPedidosActionPerformed
+        borrarFilas();
+        cargarDatosHistorial();
+    }//GEN-LAST:event_jBVolverPedidosActionPerformed
+
+    private void jbCargarMesaHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarMesaHorasActionPerformed
+        borrarFilas();
+        cargarDatosHMesaHoras();
+    }//GEN-LAST:event_jbCargarMesaHorasActionPerformed
+
+    private void jbMeseroFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMeseroFechaActionPerformed
+        borrarFilas();
+        cargarDatosHMeseroFecha();
+    }//GEN-LAST:event_jbMeseroFechaActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+          jTabbedPane1.setSelectedIndex(6);
+       borrarFilas();
+       cargarDatosHistorial();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1461,10 +1567,10 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JButton btnModifRes;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JComboBox<String> cbMesa;
+    private javax.swing.JButton jBCalcularSubtotal;
+    private javax.swing.JButton jBCargarPMesa;
+    private javax.swing.JButton jBVolverPedidos;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1472,8 +1578,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1484,18 +1589,19 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel3;
@@ -1504,7 +1610,6 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1512,22 +1617,28 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTableHistorial;
+    private javax.swing.JButton jbCargarMesaHoras;
+    private javax.swing.JButton jbCargarPMesero;
     private javax.swing.JButton jbEliminarProd;
     private javax.swing.JButton jbGuardarProd;
+    private javax.swing.JButton jbLimpiarHistorial;
     private javax.swing.JButton jbLimpiarProd;
+    private javax.swing.JButton jbMeseroFecha;
     private javax.swing.JButton jbModificarProd;
+    private javax.swing.JFormattedTextField jfHoraInicio;
     private javax.swing.JLabel jlPass;
+    private javax.swing.JLabel jlTotalHistorial;
+    private javax.swing.JFormattedTextField jtIHorafin;
     private javax.swing.JTextField jtIdMesaHistorial;
     private javax.swing.JTextField jtIdMeseroHistorial;
     private javax.swing.JTextField jtNombreProd;
     private javax.swing.JTextField jtPrecioProd;
     private javax.swing.JTextField jtStock;
-    private javax.swing.JTextField jtTotalHistorial;
     private javax.swing.JTextField nombre;
     private javax.swing.JPasswordField password;
     private javax.swing.JTable tableMenu;
@@ -1645,6 +1756,166 @@ public void pruebaPanel(){
         jTabbedPane1.setSelectedIndex(1);
     }
 
+public void armarCabeceraHistorial(){
+    modeloTabla.addColumn("idPedido");
+    modeloTabla.addColumn("idMesa");
+    modeloTabla.addColumn("idMesero");
+    modeloTabla.addColumn("fecha");
+    modeloTabla.addColumn("hora");
+    modeloTabla.addColumn("estado");
+    modeloTabla.addColumn("importe");
+    jTableHistorial.setModel(modeloTabla);
+}
+public void cargarDatosHistorial(){
+    PedidoData pd = new PedidoData();
+    List <Pedido> listaPedidos = pd.listarPedidoss();
+    
+//    DefaultTableModel modeloTabla = (DefaultTableModel) jTableHistorial.getModel();
+    for(Pedido pedido : listaPedidos){
+        Object[] fila=new Object[]{
+            pedido.getIdPedido(),
+            pedido.getMesa().getIdMesa(),
+            pedido.getMesero().getIdMesero(),
+            pedido.getFecha(),
+            pedido.getHora(),
+            pedido.isEstado(),
+            pedido.getImporte()
+        };
+          modeloTabla.addRow(fila);
+    }
+    
+}
+
+private void cargarDatosHMesero(){
+    PedidoData pd = new PedidoData();
+    int idMesero= Integer.parseInt(jtIdMeseroHistorial.getText());
+    List <Pedido> listaPedidos = pd.listarPedidoPorIdMesero(idMesero);
+    
+
+    modeloTabla.setRowCount(0);
+    for(Pedido pedido : listaPedidos){
+        Object[] fila=new Object[]{
+            pedido.getIdPedido(),
+            pedido.getMesa().getIdMesa(),
+            pedido.getMesero().getIdMesero(),
+            pedido.getFecha(),
+            pedido.getHora(),
+            pedido.isEstado(),
+            pedido.getImporte()
+        };
+          modeloTabla.addRow(fila);
+    }  
+}
+
+private void cargarDatosHMeseroFecha(){
+    PedidoData pd = new PedidoData();
+    int idMesero= Integer.parseInt(jtIdMeseroHistorial.getText());
+    Date fechaSeleccionada = jDateChooser1.getDate();
+     LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    
+    List<Pedido> listaPedidos = pd.listarPedidosCobradosPorMeseroEnDia(idMesero, fecha);
+
+    modeloTabla.setRowCount(0);
+    for(Pedido pedido : listaPedidos){
+        Object[] fila=new Object[]{
+            pedido.getIdPedido(),
+            pedido.getMesa().getIdMesa(),
+            pedido.getMesero().getIdMesero(),
+            pedido.getFecha(),
+            pedido.getHora(),
+            pedido.isEstado(),
+            pedido.getImporte()
+        };
+          modeloTabla.addRow(fila);
+    }  
+}
+
+    private void cargarDatosHMesa(){
+    PedidoData pd = new PedidoData();
+    int idMesa= Integer.parseInt(jtIdMesaHistorial.getText());
+    List<Pedido> pedidos = pd.buscarPedidoPorMesaHistorial(idMesa);
+   
+     modeloTabla.setRowCount(0);
+     for(Pedido pedido : pedidos){
+        Object[] fila=new Object[]{
+            pedido.getIdPedido(),
+            pedido.getMesa().getIdMesa(),
+            pedido.getMesero().getIdMesero(),
+            pedido.getFecha(),
+            pedido.getHora(),
+            pedido.isEstado(),
+            pedido.getImporte()
+        };
+          modeloTabla.addRow(fila);
+    }
+
+}
+    
+    private void cargarDatosHMesaHoras(){
+        PedidoData pd=new PedidoData();
+        Time inicio = Time.valueOf(jfHoraInicio.getText());
+        Time fin = Time.valueOf(jtIHorafin.getText()); 
+        int idMesa = Integer.parseInt(jtIdMesaHistorial.getText());
+        Date fechaSeleccionada = jDateChooser1.getDate();
+         LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+    List<Pedido> pedidos = pd.listarPedidosMesaEntreHoras(idMesa, inicio, fin, fecha);
+    
+    modeloTabla.setRowCount(0);
+     for(Pedido pedido : pedidos){
+        Object[] fila=new Object[]{
+            pedido.getIdPedido(),
+            pedido.getMesa().getIdMesa(),
+            pedido.getMesero().getIdMesero(),
+            pedido.getFecha(),
+            pedido.getHora(),
+            pedido.isEstado(),
+            pedido.getImporte()
+        };
+          modeloTabla.addRow(fila);
+    }        
+    }
+    
+    private void cargarDatosFechaHistorial(){
+        PedidoData pd=new PedidoData();
+       
+         Date fechaSeleccionada = jDateChooser1.getDate();
+         double totalIngresos = 0.0;
+         
+         if(fechaSeleccionada != null){
+             LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+         
+             List<Pedido> listadoPedidos=pd.listarIngresosPorFecha(fecha);
+             
+             modeloTabla.setRowCount(0);
+              for(Pedido pedido : listadoPedidos){
+        Object[] fila=new Object[]{
+            pedido.getIdPedido(),
+            pedido.getMesa().getIdMesa(),
+            pedido.getMesero().getIdMesero(),
+            pedido.getFecha(),
+            pedido.getHora(),
+            pedido.isEstado(),
+            pedido.getImporte()
+        };
+          modeloTabla.addRow(fila);
+          
+          totalIngresos += pedido.getImporte();
+    }   
+              jlTotalHistorial.setText(String.valueOf(totalIngresos));
+         }else{
+            JOptionPane.showMessageDialog(null, "No se encontraron ingresos para la fecha seleccionada.");
+        }
+         
+         
+    }
+
+private void borrarFilas(){
+        int indice=modeloTabla.getRowCount()-1;
+        for (int i = indice; i >= 0; i--) {
+            modeloTabla.removeRow(i);
+        }
+    }
 
     
     
