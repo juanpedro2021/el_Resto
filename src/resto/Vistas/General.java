@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package resto.Vistas;
 
 import java.awt.Color;
@@ -17,11 +13,9 @@ import resto.AccesoDatos.MesaData;
 import resto.AccesoDatos.PedidoData;
 import resto.Entidades.Mesa;
 import resto.Entidades.Pedido;
+import resto.Entidades.Reserva;
 
-/**
- *
- * @author lau-d
- */
+
 public class General extends javax.swing.JFrame {
 
     /**
@@ -128,6 +122,8 @@ public class General extends javax.swing.JFrame {
         txtNroMesa = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtCapa = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        cbEstado = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDistriMesas = new javax.swing.JTable();
@@ -494,6 +490,11 @@ public class General extends javax.swing.JFrame {
         btnEliminarRes.setText("Eliminar");
 
         cbMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMesaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -564,9 +565,17 @@ public class General extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nro Mesa", "Fecha&Hora", "Cliente", "DNI"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout PreservasLayout = new javax.swing.GroupLayout(Preservas);
@@ -705,6 +714,11 @@ public class General extends javax.swing.JFrame {
 
         jbGuardarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         jbGuardarProd.setText("Guardar");
+        jbGuardarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarProdActionPerformed(evt);
+            }
+        });
 
         jbModificarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/modificar3e.png"))); // NOI18N
         jbModificarProd.setText("Modificar");
@@ -827,15 +841,35 @@ public class General extends javax.swing.JFrame {
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         btnAgregar.setText("AGREGAR");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/eliminar.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/modificar3e.png"))); // NOI18N
         btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/escoba2e.png"))); // NOI18N
         btnLimpiar.setText("LIMPIAR");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel8.setText("MESAS");
@@ -852,6 +886,15 @@ public class General extends javax.swing.JFrame {
 
         jLabel15.setText("CAPACIDAD:");
 
+        jLabel2.setText("ESTADO:");
+
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libre", "Reservada", "Ocupada" }));
+        cbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -864,18 +907,21 @@ public class General extends javax.swing.JFrame {
                             .addComponent(jLabel10)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel14))
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCapa, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnEliminar)
                                     .addComponent(btnAgregar))
                                 .addGap(56, 56, 56)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCapa, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel6Layout.createSequentialGroup()
                             .addContainerGap()
@@ -904,7 +950,11 @@ public class General extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtCapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnEditar))
@@ -923,7 +973,7 @@ public class General extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "idMesa", "Nro Mesa", "Capacidad", "Estado"
             }
         ));
         jScrollPane2.setViewportView(tblDistriMesas);
@@ -942,7 +992,7 @@ public class General extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -959,12 +1009,12 @@ public class General extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("DISTRI MESAS", jPanel5);
@@ -1002,6 +1052,11 @@ public class General extends javax.swing.JFrame {
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
         jButton10.setText("Cargar");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setText("Calcular totales");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -1247,6 +1302,102 @@ public class General extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void cbMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMesaActionPerformed
+        // TODO add your handling code here:
+        Reserva reservaSeleccionada=(Reserva)cbMesa.getSelectedItem();
+        
+        
+        
+    }//GEN-LAST:event_cbMesaActionPerformed
+
+    private void jbGuardarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarProdActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jbGuardarProdActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbEstadoActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        txtNroMesa.setText("");
+        txtCapa.setText("");
+        txtidMesa.setText("");
+//        borrarFilasMesas();
+//        cargarTablaDistriMesas();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        //txtNroMesa, capacidad, estado
+                
+        Mesa mesa = new Mesa();
+        int NroMesa=Integer.parseInt(txtNroMesa.getText());
+        int capacidad = Integer.parseInt(txtCapa.getText());
+        int estadoM = 0;
+        String seleccion = (String) cbEstado.getSelectedItem();
+        if (seleccion.equals("Reservada")) {
+            estadoM = 1;
+        } else if (seleccion.equals("Ocupada")) {
+            estadoM = 2;
+        } else {
+            estadoM = 0;
+        }
+        
+        mesa.setNumMesa(NroMesa);
+        mesa.setCapacidad(capacidad);
+        mesa.setEstado(estadoM);
+        
+        MesaData mesaD = new MesaData();
+        mesaD.guardarMesa(mesa);
+        
+        
+        
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+        int idm = Integer.parseInt(txtidMesa.getText());
+        
+        MesaData mesaData = new MesaData();
+        mesaData.eliminarMesa(idm);
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        
+        Mesa mesa = new Mesa();
+        int NroMesa=Integer.parseInt(txtNroMesa.getText());
+        int capacidad = Integer.parseInt(txtCapa.getText());
+        int estadoM = 0;
+        String seleccion = (String) cbEstado.getSelectedItem();
+        if (seleccion.equals("Reservada")) {
+            estadoM = 1;
+        } else if (seleccion.equals("Ocupada")) {
+            estadoM = 2;
+        } else {
+            estadoM = 0;
+        }
+        
+        mesa.setNumMesa(NroMesa);
+        mesa.setCapacidad(capacidad);
+        mesa.setEstado(estadoM);
+        
+        MesaData mesaD = new MesaData();
+        mesaD.guardarMesa(mesa);
+        
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1308,6 +1459,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnLimpiarRes;
     private javax.swing.JButton btnModifRes;
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JComboBox<String> cbMesa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1333,6 +1485,7 @@ public class General extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
@@ -1492,5 +1645,8 @@ public void pruebaPanel(){
         jTabbedPane1.setSelectedIndex(1);
     }
 
+
+    
+    
 
 }
