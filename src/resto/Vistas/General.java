@@ -1473,18 +1473,24 @@ ProductoData prodPedido = new ProductoData();
                     modeloMenu.setValueAt(nuevoCantidad, i, 2);
                     modeloMenu.setValueAt(nuevoSub, i, 4);
                     TotalaPagar += nuevoSub;
-                    return ;
+                    System.out.println("TOTAL ES "+ TotalaPagar);
+                    totalMenu.setText(String.valueOf(TotalaPagar));
+                    return;
                 }
             }
+                
             ArrayList lista = new ArrayList();
-            lista.add(item);//id detall pedido
+
             lista.add(id);//id  del producto seleccionado producto
+                        lista.add(item);//id detalle pedido
             lista.add(nombre);//nombre del producto seleccionado
             lista.add(nuevoCantidad);// la cantidad que agregue de ese procucto
             lista.add(precio);// precio unitario del producto
             //lista.add(nuevoSub);//el subtotal que es el precio * la cantidad
-     
-            Object[] M = new Object[5];
+            
+     // PONER E ID EN LA POSCION CERO PARA QUE ENTRE EN EL IF
+     int esto=lista.size();
+            Object[] M = new Object[esto];
             M[0] = lista.get(0);
             M[1] = lista.get(2);
             M[2] = lista.get(3);
@@ -1492,8 +1498,8 @@ ProductoData prodPedido = new ProductoData();
             
             modeloMenu.addRow(M);
 
-            
-            totalMenu.setText(String.valueOf(TotalaPagar));
+            System.out.println("TOTAL ES "+ TotalaPagar);
+           // totalMenu.setText(String.valueOf(TotalaPagar));
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONA UNA FILA");
         }
@@ -2251,62 +2257,62 @@ private void cargarDatosHMeseroFecha(){
 }
     
     private void cargarDatosHMesaHoras(){
-        PedidoData pd=new PedidoData();
-        Time inicio = Time.valueOf(jfHoraInicio.getText());
-        Time fin = Time.valueOf(jtIHorafin.getText()); 
-        int idMesa = Integer.parseInt(jtIdMesaHistorial.getText());
-        Date fechaSeleccionada = jDateChooser1.getDate();
-        LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-    List<Pedido> pedidos = pd.listarPedidosMesaEntreHoras(idMesa, inicio, fin, fecha);
-    
-    modeloTabla.setRowCount(0);
-     for(Pedido pedido : pedidos){
-        Object[] fila=new Object[]{
-            pedido.getIdPedido(),
-            pedido.getMesa().getIdMesa(),
-            pedido.getMesero().getIdMesero(),
-            pedido.getFecha(),
-            pedido.getHora(),
-            pedido.isEstado(),
-            pedido.getImporte()
-        };
-          modeloTabla.addRow(fila);
-    }        
+//        PedidoData pd=new PedidoData();
+//        Time inicio = Time.valueOf(jfHoraInicio.getText());
+//        Time fin = Time.valueOf(jtIHorafin.getText()); 
+//        int idMesa = Integer.parseInt(jtIdMesaHistorial.getText());
+//        Date fechaSeleccionada = jDateChooser1.getDate();
+//        LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        
+//    List<Pedido> pedidos = pd.listarPedidosMesaEntreHoras(idMesa, inicio, fin, fecha);
+//    
+//    modeloTabla.setRowCount(0);
+//     for(Pedido pedido : pedidos){
+//        Object[] fila=new Object[]{
+//            pedido.getIdPedido(),
+//            pedido.getMesa().getIdMesa(),
+//            pedido.getMesero().getIdMesero(),
+//            pedido.getFecha(),
+//            pedido.getHora(),
+//            pedido.isEstado(),
+//            pedido.getImporte()
+//        };
+//          modeloTabla.addRow(fila);
+//    }        
     }
     
     private void cargarDatosFechaHistorial(){
-        PedidoData pd=new PedidoData();
-       
-         Date fechaSeleccionada = jDateChooser1.getDate();
-         double totalIngresos = 0.0;
-         
-         if(fechaSeleccionada != null){
-             LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-         
-             List<Pedido> listadoPedidos=pd.listarIngresosPorFecha(fecha);
-             
-             modeloTabla.setRowCount(0);
-              for(Pedido pedido : listadoPedidos){ //for(Producto producto : listadoProducto){
-        Object[] fila=new Object[]{
-            pedido.getIdPedido(),
-            pedido.getMesa().getIdMesa(),
-            pedido.getMesero().getIdMesero(),
-            pedido.getFecha(),
-            pedido.getHora(),
-            pedido.isEstado(),
-            pedido.getImporte()
-        };
-          modeloTabla.addRow(fila);
-          
-          totalIngresos += pedido.getImporte();
-    }   
-              jlTotalHistorial.setText(String.valueOf(totalIngresos));
-         }else{
-            JOptionPane.showMessageDialog(null, "No se encontraron ingresos para la fecha seleccionada.");
-        }
-         
-         
+//        PedidoData pd=new PedidoData();
+//       
+//         Date fechaSeleccionada = jDateChooser1.getDate();
+//         double totalIngresos = 0.0;
+//         
+//         if(fechaSeleccionada != null){
+//             LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//         
+//             List<Pedido> listadoPedidos=pd.listarIngresosPorFecha(fecha);
+//             
+//             modeloTabla.setRowCount(0);
+//              for(Pedido pedido : listadoPedidos){ //for(Producto producto : listadoProducto){
+//        Object[] fila=new Object[]{
+//            pedido.getIdPedido(),
+//            pedido.getMesa().getIdMesa(),
+//            pedido.getMesero().getIdMesero(),
+//            pedido.getFecha(),
+//            pedido.getHora(),
+//            pedido.isEstado(),
+//            pedido.getImporte()
+//        };
+//          modeloTabla.addRow(fila);
+//          
+//          totalIngresos += pedido.getImporte();
+//    }   
+//              jlTotalHistorial.setText(String.valueOf(totalIngresos));
+//         }else{
+//            JOptionPane.showMessageDialog(null, "No se encontraron ingresos para la fecha seleccionada.");
+//        }
+//         
+//         
     }
 
 private void borrarFilas(){
@@ -2405,10 +2411,12 @@ JTablaProductos.setModel(modeloPedido);
 }
 
 public void CargarCabeceraMenu(){
+//modeloMenu.addColumn("");
 modeloMenu.addColumn("NumPedido");
 modeloMenu.addColumn("Producto");
 modeloMenu.addColumn("Cant");
 modeloMenu.addColumn("Precio");
+modeloMenu.addColumn("SubTtotal");
 JTablaMenu.setModel(modeloMenu);   
 }
 
