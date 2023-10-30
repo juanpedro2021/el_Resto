@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -60,6 +61,7 @@ public class General extends javax.swing.JFrame {
         cargarComboMesas();
         CargarCabeceraMenu();
         cargarDatosPedido();
+         totalMenu.setText("0");
     }
 
     /**
@@ -1451,11 +1453,13 @@ ProductoData prodPedido = new ProductoData();
         }     }//GEN-LAST:event_JTBuscarProductosKeyReleased
 
     private void JBAgragarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAgragarProductoActionPerformed
-     int id=0;
+    double comodin =parseDouble(totalMenu.getText());
+        int id=0;
      int item = 0;
      int nuevoCantidad = 1;
      double nuevoSub = 0.00;
-     double TotalaPagar = 0.00;
+     double TotalaPagar = comodin;
+    
      String nombre="";
      double precio=0.00;
      DetallePedido detalleMenu = new DetallePedido();
@@ -1499,7 +1503,7 @@ ProductoData prodPedido = new ProductoData();
             modeloMenu.addRow(M);
 
             System.out.println("TOTAL ES "+ TotalaPagar);
-           // totalMenu.setText(String.valueOf(TotalaPagar));
+            
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONA UNA FILA");
         }
