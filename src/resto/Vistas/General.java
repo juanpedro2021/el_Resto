@@ -58,6 +58,7 @@ public class General extends javax.swing.JFrame {
         CargarCabeceraDistri();
         CargarCabeceraProductosPedidos();
         cargarComboMesas();
+        CargarCabeceraMenu();
         cargarDatosPedido();
     }
 
@@ -193,7 +194,6 @@ public class General extends javax.swing.JFrame {
         jbLimpiarHistorial = new javax.swing.JButton();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jbCargarPMesero = new javax.swing.JButton();
         jBVolverPedidos = new javax.swing.JButton();
         jbCargarMesaHoras = new javax.swing.JButton();
@@ -1348,11 +1348,10 @@ public class General extends javax.swing.JFrame {
                             .addComponent(jBCalcularSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(50, 50, 50))))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jBVolverPedidos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(jLabel46)
                         .addGap(24, 24, 24)
                         .addComponent(jlTotalHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1371,7 +1370,6 @@ public class General extends javax.swing.JFrame {
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addComponent(jBCalcularSubtotal))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel45)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addComponent(jBCargarPMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1453,10 +1451,9 @@ ProductoData prodPedido = new ProductoData();
         }     }//GEN-LAST:event_JTBuscarProductosKeyReleased
 
     private void JBAgragarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAgragarProductoActionPerformed
-     borrarFilaMenu();
      int id=0;
      int item = 0;
-     int nuevoCantidad = 0;
+     int nuevoCantidad = 1;
      double nuevoSub = 0.00;
      double TotalaPagar = 0.00;
      String nombre="";
@@ -1467,8 +1464,6 @@ ProductoData prodPedido = new ProductoData();
              id = Integer.parseInt(JTablaProductos.getValueAt(JTablaProductos.getSelectedRow(), 0).toString());
              nombre = JTablaProductos.getValueAt(JTablaProductos.getSelectedRow(), 1).toString();
              precio = Double.parseDouble(JTablaProductos.getValueAt(JTablaProductos.getSelectedRow(), 2).toString());
-            System.out.println(id+"id"+nombre+"nombre"+precio+"precio");
-            double total = 1 * precio;
             item = item + 1;
             for (int i = 0; i < JTablaMenu.getRowCount(); i++) {
                 if (JTablaMenu.getValueAt(i, 0).equals(id)) {
@@ -1478,27 +1473,26 @@ ProductoData prodPedido = new ProductoData();
                     modeloMenu.setValueAt(nuevoCantidad, i, 2);
                     modeloMenu.setValueAt(nuevoSub, i, 4);
                     TotalaPagar += nuevoSub;
-                    return;
+                    return ;
                 }
             }
             ArrayList lista = new ArrayList();
-            lista.add(item);
-            lista.add(id);
-            lista.add(nombre);
-            lista.add(nuevoCantidad);
-            lista.add(precio);
-            lista.add(nuevoSub);
-            Object[] M = new Object[6];
+            lista.add(item);//id detall pedido
+            lista.add(id);//id  del producto seleccionado producto
+            lista.add(nombre);//nombre del producto seleccionado
+            lista.add(nuevoCantidad);// la cantidad que agregue de ese procucto
+            lista.add(precio);// precio unitario del producto
+            //lista.add(nuevoSub);//el subtotal que es el precio * la cantidad
+     
+            Object[] M = new Object[5];
             M[0] = lista.get(0);
-            M[1] = lista.get(1);
-            M[2] = lista.get(2);
-            M[3] = lista.get(3);
-            M[4] = lista.get(4);
-            M[5] = lista.get(5);
-            modeloMenu.addRow(M);
+            M[1] = lista.get(2);
+            M[2] = lista.get(3);
+            M[3] = lista.get(4);
             
+            modeloMenu.addRow(M);
 
-            JTablaMenu.setModel(modeloMenu);
+            
             totalMenu.setText(String.valueOf(TotalaPagar));
         } else {
             JOptionPane.showMessageDialog(null, "SELECCIONA UNA FILA");
@@ -1560,7 +1554,7 @@ ProductoData prodPedido = new ProductoData();
         jtIdMesaHistorial.setText("");
         jfHoraInicio.setText("");
         jtIHorafin.setText("");
-        jDateChooser1.setDate(null);
+//        jDateChooser1.setDate(null);
         jlTotalHistorial.setText("");
     }//GEN-LAST:event_jbLimpiarHistorialActionPerformed
 
@@ -1967,7 +1961,6 @@ ProductoData prodPedido = new ProductoData();
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2215,25 +2208,25 @@ private void cargarDatosPedido(){
 
 private void cargarDatosHMeseroFecha(){
     PedidoData pd = new PedidoData();
-    int idMesero= Integer.parseInt(jtIdMeseroHistorial.getText());
-    Date fechaSeleccionada = jDateChooser1.getDate();
-     LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    
-    List<Pedido> listaPedidos = pd.listarPedidosCobradosPorMeseroEnDia(idMesero, fecha);
-
-    modeloTabla.setRowCount(0);
-    for(Pedido pedido : listaPedidos){
-        Object[] fila=new Object[]{
-            pedido.getIdPedido(),
-            pedido.getMesa().getIdMesa(),
-            pedido.getMesero().getIdMesero(),
-            pedido.getFecha(),
-            pedido.getHora(),
-            pedido.isEstado(),
-            pedido.getImporte()
-        };
-          modeloTabla.addRow(fila);
-    }  
+//    int idMesero= Integer.parseInt(jtIdMeseroHistorial.getText());
+//    //Date fechaSeleccionada = jDateChooser1.getDate();
+//    // LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//    
+//    List<Pedido> listaPedidos = pd.listarPedidosCobradosPorMeseroEnDia(idMesero, fecha);
+//
+//    modeloTabla.setRowCount(0);
+//    for(Pedido pedido : listaPedidos){
+//        Object[] fila=new Object[]{
+//            pedido.getIdPedido(),
+//            pedido.getMesa().getIdMesa(),
+//            pedido.getMesero().getIdMesero(),
+//            pedido.getFecha(),
+//            pedido.getHora(),
+//            pedido.isEstado(),
+//            pedido.getImporte()
+//        };
+//          modeloTabla.addRow(fila);
+//    }  
 }
 
     private void cargarDatosHMesa(){
@@ -2263,7 +2256,7 @@ private void cargarDatosHMeseroFecha(){
         Time fin = Time.valueOf(jtIHorafin.getText()); 
         int idMesa = Integer.parseInt(jtIdMesaHistorial.getText());
         Date fechaSeleccionada = jDateChooser1.getDate();
-         LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fecha= fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         
     List<Pedido> pedidos = pd.listarPedidosMesaEntreHoras(idMesa, inicio, fin, fecha);
     
@@ -2416,7 +2409,6 @@ modeloMenu.addColumn("NumPedido");
 modeloMenu.addColumn("Producto");
 modeloMenu.addColumn("Cant");
 modeloMenu.addColumn("Precio");
-modeloMenu.addColumn("SubTotal");
 JTablaMenu.setModel(modeloMenu);   
 }
 
@@ -2490,14 +2482,6 @@ modeloProductosPedido.addRow(new Object[]{prod.getidProducto(),prod.getNombre(),
             modeloM.addRow(new Object[]{ mesa.getIdMesa(),mesa.getNumMesa(),mesa.getCapacidad(),estadoM});
 
         }
-    }
-    
-    public void CargarDatosMenu(List Menu){
-    for(Object productoMenu : Menu){
-    modeloMenu.addRow((Object[]) productoMenu);
-    }
-        
-    }
-    
+    }    
 
 }
