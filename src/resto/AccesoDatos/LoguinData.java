@@ -59,7 +59,7 @@ public class LoguinData {
             if(me.getUser().equals(usuario)){
                 if(me.getPassword().equals(contra)){
                     correcto=true;
-                    JOptionPane.showMessageDialog(null, "Bienvenido a ");
+                    JOptionPane.showMessageDialog(null, "Bienvenido a Lo De MariaDB ");
                     return correcto;
                 }else{
                 JOptionPane.showMessageDialog(null, "contraseña incorrecta.");

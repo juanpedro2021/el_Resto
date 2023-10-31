@@ -71,6 +71,7 @@ public class General extends javax.swing.JFrame {
         CargarCabeceraMenu();
         cargarDatosPedido();
          totalMenu.setText("0");
+         jTabbedPane1.setSelectedIndex(5);
         //saber();
     }
 
@@ -107,7 +108,6 @@ public class General extends javax.swing.JFrame {
         JBGenerarPedido = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         totalMenu = new javax.swing.JLabel();
-        JBAgregarMesero = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         JTNumMesa = new javax.swing.JTextField();
@@ -227,7 +227,7 @@ public class General extends javax.swing.JFrame {
         nombreNegocio.setBackground(new java.awt.Color(255, 204, 51));
         nombreNegocio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nombreNegocio.setForeground(new java.awt.Color(102, 255, 0));
-        nombreNegocio.setText("                                                                                  NOMBRE RESTAURANT");
+        nombreNegocio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoResto.png"))); // NOI18N
         nombreNegocio.setToolTipText("");
         nombreNegocio.setAutoscrolls(true);
         nombreNegocio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -471,16 +471,6 @@ public class General extends javax.swing.JFrame {
         totalMenu.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         totalMenu.setText("00.00");
 
-        JBAgregarMesero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgIconos/agregar3f.png"))); // NOI18N
-        JBAgregarMesero.setText("Agregar Mesero");
-        JBAgregarMesero.setActionCommand(" Agregar nombre mesero");
-        JBAgregarMesero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        JBAgregarMesero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBAgregarMeseroActionPerformed(evt);
-            }
-        });
-
         jLabel17.setText("Nombre del Mesero:");
 
         jLabel18.setText("Número del Mesa:");
@@ -532,12 +522,11 @@ public class General extends javax.swing.JFrame {
                                 .addComponent(jLabel29)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtHoraPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(PpedidosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
-                                .addComponent(JBAgregarMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(127, 127, 127)
-                                .addComponent(JBGenerarPedido))))
+                                .addGap(0, 383, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PpedidosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(JBGenerarPedido)
+                                .addContainerGap())))
                     .addGroup(PpedidosLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addGap(6, 6, 6)
@@ -574,19 +563,17 @@ public class General extends javax.swing.JFrame {
                     .addComponent(jLabel18)
                     .addComponent(jLabel29)
                     .addComponent(txtHoraPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
                 .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PpedidosLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(JBGenerarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JBAgregarMesero, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PpedidosLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addComponent(jLabel8)
                         .addGap(8, 8, 8)
                         .addGroup(PpedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel24)
-                            .addComponent(txtFechaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFechaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PpedidosLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JBGenerarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -1048,7 +1035,7 @@ public class General extends javax.swing.JFrame {
                             .addComponent(jLabel23)
                             .addComponent(idpro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Bestado)
@@ -1113,7 +1100,7 @@ public class General extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
 
@@ -1412,7 +1399,7 @@ public class General extends javax.swing.JFrame {
                         .addGap(70, 70, 70))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel41, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                         .addGap(39, 39, 39)))
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
@@ -1439,23 +1426,22 @@ public class General extends javax.swing.JFrame {
                             .addComponent(jtIdMesaHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                                .addComponent(jBCargarPMesa)
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jbCargarMesaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBCalcularSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel13Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jButton1))
+                                        .addComponent(jbCargarMesaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jBCalcularSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel13Layout.createSequentialGroup()
-                                        .addComponent(jBCargarPMesa)
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(jButton1)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addGap(25, 25, 25))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
@@ -1474,7 +1460,7 @@ public class General extends javax.swing.JFrame {
                                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel45)
                                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
+                                .addGap(49, 49, 49)
                                 .addComponent(jBCalcularSubtotal))
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(jBCargarPMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1498,13 +1484,13 @@ public class General extends javax.swing.JFrame {
                                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel46)
                                     .addComponent(jlTotalHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 37, Short.MAX_VALUE))
+                                .addGap(0, 56, Short.MAX_VALUE))
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jbLimpiarHistorial)
                                     .addComponent(jBVolverPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton1))
-                                .addContainerGap(30, Short.MAX_VALUE))))
+                                .addContainerGap(49, Short.MAX_VALUE))))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1720,22 +1706,6 @@ pedidod.guardarPedido(pedido);
 ////            System.out.println("La tabla está vacía.");
 ////        }
     }//GEN-LAST:event_JBGenerarPedidoActionPerformed
-
-    private void JBAgregarMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAgregarMeseroActionPerformed
-//        if (txtComentario.getText().equals("")) {
-//            JOptionPane.showMessageDialog(null, "SELECCIONE UNA FILA");
-//        } else {
-//            int id = Integer.parseInt(tableMenu.getValueAt(tableMenu.getSelectedRow(), 0).toString());
-//            for (int i = 0; i < tableMenu.getRowCount(); i++) {
-//                if (tableMenu.getValueAt(i, 0).equals(id)) {
-//                    tmp.setValueAt(txtComentario.getText(), i, 5);
-//                    txtComentario.setText("");
-//                    tableMenu.clearSelection();
-//                    return;
-//                }
-//            }
-//        }
-    }//GEN-LAST:event_JBAgregarMeseroActionPerformed
 
     private void JBEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEliminarProductoActionPerformed
 //        modelo = (DefaultTableModel) tableMenu.getModel();
@@ -2214,7 +2184,6 @@ pedidod.guardarPedido(pedido);
     private javax.swing.JButton Blimpiar;
     private javax.swing.JButton Bregistrar;
     private javax.swing.JButton JBAgragarProducto;
-    private javax.swing.JButton JBAgregarMesero;
     private javax.swing.JButton JBEliminarProducto;
     private javax.swing.JButton JBGenerarPedido;
     private javax.swing.JTextField JTBuscarProductos;
@@ -2380,7 +2349,7 @@ public int pruebaPanel(){
 
             numero = mesa.getNumMesa();
             System.out.println("numero mesa"+numero);
-            JButton boton = new JButton("MESA N°: " + numero, new ImageIcon(getClass().getResource("/img/login33.jpg")));
+            JButton boton = new JButton("MESA N°: " + numero, new ImageIcon(getClass().getResource("/img/mesa1b.png")));
             boton.setHorizontalTextPosition(JButton.CENTER);
             boton.setVerticalTextPosition(JButton.BOTTOM);
 

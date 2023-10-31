@@ -61,7 +61,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 0));
 
-        jlIconLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login3 (3).jpg"))); // NOI18N
+        jlIconLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/loginDefinitivo.png"))); // NOI18N
         jlIconLogin.setText("jLabel2");
 
         jlUsuario.setText("Usuario");
