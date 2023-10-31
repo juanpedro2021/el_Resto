@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import resto.Entidades.DetallePedido;
 import resto.Entidades.Mesa;
@@ -566,6 +568,18 @@ public class PedidoData {
 		}
      return listadopedidos;
     }
+    
+    public int buscarNumero(String letras) {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(letras);
+
+        if (m.find()) {
+            return Integer.parseInt(m.group());
+        }
+
+        return -1; // Devuelve -1 si no se encuentra ningún número
+    }
+    
     
 //     public Pedido buscarPedidoPorMesa(int idMesa){
 //	Pedido pedido = null;

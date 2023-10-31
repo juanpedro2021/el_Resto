@@ -92,7 +92,7 @@ public void modificarMesa (Mesa mesa) {
  public Mesa buscarMesa(int id){
 	Mesa mesa = null;
      
-	String sql = "SELECT numMesa, capacidad , estado FROM mesa WHERE idMesa = ? AND estado  IN (2,3)";
+	String sql = "SELECT numMesa, capacidad , estado FROM mesa WHERE idMesa = ? AND estado  IN (0,1,2)";
 	PreparedStatement ps = null;
 	try {
 		ps = (PreparedStatement) con.prepareStatement(sql);

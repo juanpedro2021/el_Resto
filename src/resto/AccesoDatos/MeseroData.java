@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import resto.Entidades.Mesero;
 
@@ -150,8 +152,35 @@ String sql = "UPDATE mesero SET estado = 0 WHERE idMesero = ? ";
 			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesero "+ex.getMessage());
 		}
 		return meseros;
-		}        
-	}
+		}
+ 
+     public Mesero buscarMeseroProNombre(String buscar) {
+           Mesero mesero = new Mesero();
+              String sql = "SELECT * from mesero WHERE estado=1 AND nombre LIKE '%" + buscar + "%'";
+         
+         try {
+
+              PreparedStatement ps= con.prepareStatement(sql);
+              ResultSet rs=ps.executeQuery();
+              
+              
+                  
+                  if (rs.next()){
+                      mesero=new Mesero();
+                      mesero.setIdMesero(rs.getInt("idMesero"));
+                      mesero.setNombre(rs.getString("nombre"));
+                      mesero.setUser(rs.getString("user"));
+                      mesero.setPassword(rs.getString("password"));
+                      mesero.setEstado(rs.getBoolean("estado"));
+                      
+                  }
+                  ps.close();                  
+               } catch (SQLException ex) {
+              Logger.getLogger(MeseroData.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          return mesero;
+}
+}
 
         
 

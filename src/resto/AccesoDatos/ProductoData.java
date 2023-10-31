@@ -162,25 +162,27 @@ String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
         return producto;
     }
     
-    public List<Producto> buscarProductoActivoPrueba(String buscar) {
-       List <Producto> productos=new ArrayList<>();
+    public Producto buscarProductoProNombre(String buscar) {
+        Producto producto = new Producto();
        String sql = "SELECT * from producto WHERE estado=1 AND nombre LIKE '%" + buscar + "%'";
+      
        try{
            PreparedStatement ps= con.prepareStatement(sql);
            ResultSet rs=ps.executeQuery();
            
-           while(rs.next()){
-               int id= rs.getInt("idProducto");
-               boolean estado= rs.getBoolean("estado");
-               String nombre= rs.getString("nombre");
-               int cantidad= rs.getInt("stock");
-               double precio = rs.getDouble("precio");
-               productos.add(new Producto(id,estado,nombre,cantidad,precio));
-           }
+            if(rs.next()){
+                producto = new Producto();
+                producto.setidProducto(rs.getInt("idProducto"));
+                producto.setEstado(rs.getBoolean("estado"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setCantidad(rs.getInt("stock"));
+                producto.setPrecio(rs.getDouble("precio"));            
+            }
+            ps.close();
        }catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, "error al acceder a la tabla Productos"); 
+         JOptionPane.showMessageDialog(null, "error al acceder a la tabla Producto"); 
      }
-     return productos;
+     return producto;
     }
     
 }
