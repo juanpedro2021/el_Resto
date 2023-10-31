@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -1751,7 +1752,26 @@ pedidod.guardarPedido(pedido);
     }//GEN-LAST:event_jtIdMeseroHistorialActionPerformed
 
     private void jBCargarPMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCargarPMesaActionPerformed
+       try {
+        String idText = jtIdMesaHistorial.getText();
+        
+        if (idText.isEmpty()) {
+            throw new NumberFormatException("El campo ID está vacío.");
+        }
+
+        int id = Integer.parseInt(idText);
+        
+        // Aquí puedes continuar con tu lógica de cargar datos usando 'id'.
         cargarDatosHMesa();
+    } catch (NumberFormatException ex) {
+        // Manejo de excepción si el campo no es un número válido o está vacío
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Ingrese un numero valido" );
+    } catch (Exception ex) {
+        // Manejo de excepción para otros errores
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Ingrese un numero valido ");
+    }
     }//GEN-LAST:event_jBCargarPMesaActionPerformed
 
     private void jBCalcularSubtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCalcularSubtotalActionPerformed
@@ -1768,7 +1788,26 @@ pedidod.guardarPedido(pedido);
     }//GEN-LAST:event_jbLimpiarHistorialActionPerformed
 
     private void jbCargarPMeseroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarPMeseroActionPerformed
+      try {
+        String idText = jtIdMeseroHistorial.getText();
+        
+        if (idText.isEmpty()) {
+            throw new NumberFormatException("El campo ID está vacío.");
+        }
+
+        int id = Integer.parseInt(idText);
+        
+        // Aquí puedes continuar con tu lógica de cargar datos usando 'id'.
         cargarDatosHMesero();
+    } catch (NumberFormatException ex) {
+        // Manejo de excepción si el campo no es un número válido o está vacío
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Ingrese un numero valido" );
+    } catch (Exception ex) {
+        // Manejo de excepción para otros errores
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Ingrese un numero valido ");
+    }
     }//GEN-LAST:event_jbCargarPMeseroActionPerformed
 
     private void jBVolverPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverPedidosActionPerformed
@@ -1782,8 +1821,29 @@ pedidod.guardarPedido(pedido);
     }//GEN-LAST:event_jbCargarMesaHorasActionPerformed
 
     private void jbMeseroFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMeseroFechaActionPerformed
-        borrarFilas();
+ try {
+        String idText = jtIdMeseroHistorial.getText();
+        
+        if (idText.isEmpty()) {
+            throw new NumberFormatException("El campo ID está vacío.");
+        }
+
+        int id = Integer.parseInt(idText);
+        
+        // Aquí puedes continuar con tu lógica de cargar datos usando 'id'.
+       borrarFilas();
         cargarDatosHMeseroFecha();
+    } catch (NumberFormatException ex) {
+        // Manejo de excepción si el campo no es un número válido o está vacío
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Ingrese un numero valido" );
+    } catch (Exception ex) {
+        // Manejo de excepción para otros errores
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Id o fecha no son validos");
+    }
+
+        
     }//GEN-LAST:event_jbMeseroFechaActionPerformed
 
     private void bHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHistorialActionPerformed
@@ -2403,7 +2463,8 @@ public void armarCabeceraHistorial(){
     jTableHistorial.setModel(modeloTabla);
 }
 public void cargarDatosHistorial(){
-    PedidoData pd = new PedidoData();
+// try{   
+     PedidoData pd = new PedidoData();
     List <Pedido> listaPedidos = pd.listarPedidoss();
     
 //    DefaultTableModel modeloTabla = (DefaultTableModel) jTableHistorial.getModel();
@@ -2419,7 +2480,11 @@ public void cargarDatosHistorial(){
         };
           modeloTabla.addRow(fila);
     }
-    
+// }catch (NumberFormatException ex) {
+//        // Manejo de excepción, aquí puedes mostrar un mensaje de error o hacer algo con la excepción.
+//        // Esto muestra la información de la excepción en la consola.
+//        JOptionPane.showMessageDialog(null, "Error al cargar los datos del historial: " + ex.getMessage());
+//    }
 }
 
 private void cargarDatosHMesero(){

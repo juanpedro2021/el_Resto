@@ -210,6 +210,7 @@ public class PedidoData {
            PreparedStatement ps=con.prepareStatement(sql);
            ps.setInt(1, idMesero);
            ResultSet rs=ps.executeQuery();
+           if(rs.next()){
            while(rs.next()){
                Pedido pedido=new Pedido();
                pedido.setIdPedido(rs.getInt("idPedido"));
@@ -222,6 +223,9 @@ public class PedidoData {
                 pedido.setImporte(rs.getInt("importe"));
                 pedido.setHora(rs.getTime("hora"));
                pedidos.add(pedido);
+           }
+           }else{
+               JOptionPane.showMessageDialog(null, "Este pedido no existe");
            }
            ps.close();
        } catch (SQLException ex) {
@@ -269,7 +273,7 @@ public class PedidoData {
             ps.setInt(1, idMesero);
             ps.setDate(2, Date.valueOf(fecha));
             ResultSet rs= ps.executeQuery();
-            
+//            if(rs.next()){
             while(rs.next()){
               Pedido pedido=new Pedido();
               pedido.setIdPedido(rs.getInt("idPedido"));
@@ -283,6 +287,9 @@ public class PedidoData {
                 pedido.setHora(rs.getTime("hora"));
                pedidos.add(pedido);  
             }
+//            }else{
+//               JOptionPane.showMessageDialog(null, "Este pedido no existe");
+//           }
         }catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido "+ex.getMessage());
 		}
@@ -380,7 +387,9 @@ public class PedidoData {
 		ps.setInt(1, idMesa);
 
 		ResultSet rs = ps.executeQuery();
-
+                if(rs.next()){
+                    
+               
 		while (rs.next()) {
 		Pedido pedido=new Pedido();//acá uso el constructor vacío de pedido
                 //agrego el id
@@ -406,7 +415,10 @@ public class PedidoData {
                 
                 listadopedidos.add(pedido);
 		
-		} 
+		}
+                 }else {
+			JOptionPane.showMessageDialog(null, "No existe el pedido");
+		}
 		ps.close();
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido "+ex.getMessage());
